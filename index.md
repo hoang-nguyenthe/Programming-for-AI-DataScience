@@ -2,7 +2,7 @@
 
 > **Programming for Artificial Intelligence and Data Science**
 > Ho Chi Minh City University of Technology (HCMUT), VNU-HCM
-> Semester I — Academic Year 2025–2026
+> Semester II — Academic Year 2025–2026
 
 ---
 

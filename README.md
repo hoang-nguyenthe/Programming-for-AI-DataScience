@@ -25,7 +25,7 @@ This repository contains our team's work on **Assignment 1: Exploratory Data Ana
 
 | Student ID | Full Name | Role |
 |:----------:|-----------|:----:|
-| 2352354 | Nguyễn Thế Hoàng | 🔰 Team Leader |
+| 2352354 | Nguyễn Thế Hoàng | Team Leader |
 | 2352179 | Ngô Trần Đình Duy | Member |
 | 2352378 | Hồ Minh Huy | Member |
 | 2352780 | Nguyễn Việt Nam | Member |

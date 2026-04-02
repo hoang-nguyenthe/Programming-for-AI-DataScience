@@ -598,6 +598,329 @@
     {
       "feature": "Ad Topic Line",
       "n_unique": 1000,
+      "mode": "Cloned 5thgeneration orchestration",
+      "mode_count": 1,
+      "mode_pct": 0.1,
+      "cardinality": "High",
+      "top_categories": {
+        "Cloned 5thgeneration orchestration": 1,
+        "Monitored national standardization": 1,
+        "Organic bottom-line service-desk": 1,
+        "Triple-buffered reciprocal time-frame": 1,
+        "Robust logistical utilization": 1,
+        "Sharable client-driven software": 1,
+        "Enhanced dedicated support": 1,
+        "Reactive local challenge": 1,
+        "Configurable coherent function": 1,
+        "Mandatory homogeneous architecture": 1
+      }
+    },
+    {
+      "feature": "City",
+      "n_unique": 969,
+      "mode": "Lisamouth",
+      "mode_count": 3,
+      "mode_pct": 0.3,
+      "cardinality": "High",
+      "top_categories": {
+        "Lisamouth": 3,
+        "Williamsport": 3,
+        "Wrightburgh": 2,
+        "Millertown": 2,
+        "Pamelamouth": 2,
+        "Johnstad": 2,
+        "Robertfurt": 2,
+        "New Sheila": 2,
+        "Benjaminchester": 2,
+        "Michelleside": 2
+      }
+    },
+    {
+      "feature": "Country",
+      "n_unique": 237,
+      "mode": "Czech Republic",
+      "mode_count": 9,
+      "mode_pct": 0.9,
+      "cardinality": "High",
+      "top_categories": {
+        "Czech Republic": 9,
+        "France": 9,
+        "Australia": 8,
+        "Afghanistan": 8,
+        "Greece": 8,
+        "Peru": 8,
+        "Senegal": 8,
+        "Liberia": 8,
+        "Micronesia": 8,
+        "Turkey": 8
+      }
+    },
+    {
+      "feature": "Timestamp",
+      "n_unique": 1000,
+      "mode": "2016-03-27 00:53:11",
+      "mode_count": 1,
+      "mode_pct": 0.1,
+      "cardinality": "High",
+      "top_categories": {
+        "2016-03-27 00:53:11": 1,
+        "2016-04-04 01:39:02": 1,
+        "2016-03-13 20:35:42": 1,
+        "2016-01-10 02:31:19": 1,
+        "2016-06-03 03:36:18": 1,
+        "2016-05-19 14:30:17": 1,
+        "2016-01-28 20:59:32": 1,
+        "2016-03-07 01:40:15": 1,
+        "2016-04-18 09:33:42": 1,
+        "2016-07-11 01:42:51": 1
+      }
+    }
+  ],
+  "target_distribution": {
+    "name": "Clicked on Ad",
+    "classes": [
+      {
+        "label": "0",
+        "count": 500,
+        "percentage": 50.0
+      },
+      {
+        "label": "1",
+        "count": 500,
+        "percentage": 50.0
+      }
+    ],
+    "imbalance_ratio": 1.0,
+    "is_balanced": "True"
+  },
+  "correlation": {
+    "matrix": {
+      "Daily Time Spent on Site": {
+        "Daily Time Spent on Site": 1.0,
+        "Age": -0.3315,
+        "Area Income": 0.311,
+        "Daily Internet Usage": 0.5187,
+        "Male": -0.019,
+        "Clicked on Ad": -0.7481
+      },
+      "Age": {
+        "Daily Time Spent on Site": -0.3315,
+        "Age": 1.0,
+        "Area Income": -0.1826,
+        "Daily Internet Usage": -0.3672,
+        "Male": -0.021,
+        "Clicked on Ad": 0.4925
+      },
+      "Area Income": {
+        "Daily Time Spent on Site": 0.311,
+        "Age": -0.1826,
+        "Area Income": 1.0,
+        "Daily Internet Usage": 0.3375,
+        "Male": 0.0013,
+        "Clicked on Ad": -0.4763
+      },
+      "Daily Internet Usage": {
+        "Daily Time Spent on Site": 0.5187,
+        "Age": -0.3672,
+        "Area Income": 0.3375,
+        "Daily Internet Usage": 1.0,
+        "Male": 0.028,
+        "Clicked on Ad": -0.7865
+      },
+      "Male": {
+        "Daily Time Spent on Site": -0.019,
+        "Age": -0.021,
+        "Area Income": 0.0013,
+        "Daily Internet Usage": 0.028,
+        "Male": 1.0,
+        "Clicked on Ad": -0.038
+      },
+      "Clicked on Ad": {
+        "Daily Time Spent on Site": -0.7481,
+        "Age": 0.4925,
+        "Area Income": -0.4763,
+        "Daily Internet Usage": -0.7865,
+        "Male": -0.038,
+        "Clicked on Ad": 1.0
+      }
+    },
+    "target_correlations": {
+      "Daily Internet Usage": -0.7865,
+      "Daily Time Spent on Site": -0.7481,
+      "Area Income": -0.4763,
+      "Male": -0.038,
+      "Age": 0.4925
+    },
+    "high_correlation_pairs": []
+  },
+  "outlier_detection": {
+    "method": "IQR (1.5x)",
+    "total_outliers": 9,
+    "per_feature": [
+      {
+        "feature": "Daily Time Spent on Site",
+        "Q1": 51.36,
+        "Q3": 78.55,
+        "IQR": 27.19,
+        "lower_bound": 10.58,
+        "upper_bound": 119.33,
+        "outlier_count": 0,
+        "outlier_pct": 0.0,
+        "severity": "\u2713 None"
+      },
+      {
+        "feature": "Age",
+        "Q1": 29.0,
+        "Q3": 42.0,
+        "IQR": 13.0,
+        "lower_bound": 9.5,
+        "upper_bound": 61.5,
+        "outlier_count": 0,
+        "outlier_pct": 0.0,
+        "severity": "\u2713 None"
+      },
+      {
+        "feature": "Area Income",
+        "Q1": 47031.8,
+        "Q3": 65470.63,
+        "IQR": 18438.83,
+        "lower_bound": 19373.55,
+        "upper_bound": 93128.88,
+        "outlier_count": 9,
+        "outlier_pct": 0.9,
+        "severity": "\u2713 Low"
+      },
+      {
+        "feature": "Daily Internet Usage",
+        "Q1": 138.83,
+        "Q3": 218.79,
+        "IQR": 79.96,
+        "lower_bound": 18.89,
+        "upper_bound": 338.74,
+        "outlier_count": 0,
+        "outlier_pct": 0.0,
+        "severity": "\u2713 None"
+      },
+      {
+        "feature": "Male",
+        "Q1": 0.0,
+        "Q3": 1.0,
+        "IQR": 1.0,
+        "lower_bound": -1.5,
+        "upper_bound": 2.5,
+        "outlier_count": 0,
+        "outlier_pct": 0.0,
+        "severity": "\u2713 None"
+      }
+    ]
+  },
+  "target_vs_numerical": [
+    {
+      "feature": "Daily Time Spent on Site",
+      "no_click_mean": 76.85,
+      "no_click_median": 77.65,
+      "click_mean": 53.15,
+      "click_median": 51.53,
+      "mean_diff_pct": 30.84
+    },
+    {
+      "feature": "Age",
+      "no_click_mean": 31.68,
+      "no_click_median": 31.0,
+      "click_mean": 40.33,
+      "click_median": 40.0,
+      "mean_diff_pct": 27.3
+    },
+    {
+      "feature": "Area Income",
+      "no_click_mean": 61385.59,
+      "no_click_median": 62275.4,
+      "click_mean": 48614.41,
+      "click_median": 49417.26,
+      "mean_diff_pct": 20.8
+    },
+    {
+      "feature": "Daily Internet Usage",
+      "no_click_mean": 214.51,
+      "no_click_median": 216.36,
+      "click_mean": 145.49,
+      "click_median": 138.79,
+      "mean_diff_pct": 32.18
+    },
+    {
+      "feature": "Male",
+      "no_click_mean": 0.5,
+      "no_click_median": 0.5,
+      "click_mean": 0.46,
+      "click_median": 0.0,
+      "mean_diff_pct": 8.0
+    }
+  ],
+  "target_vs_categorical": [
+    {
+      "feature": "Male",
+      "cross_tab": {
+        "0": {
+          "no_click_pct": 48.17,
+          "click_pct": 51.83
+        },
+        "1": {
+          "no_click_pct": 51.98,
+          "click_pct": 48.02
+        }
+      }
+    }
+  ],
+  "temporal_analysis": {
+    "click_by_hour": {
+      "0": 0.5778,
+      "1": 0.5,
+      "2": 0.4722,
+      "3": 0.5476,
+      "4": 0.5,
+      "5": 0.4773,
+      "6": 0.5897,
+      "7": 0.4815,
+      "8": 0.4884,
+      "9": 0.5714,
+      "10": 0.4516,
+      "11": 0.6,
+      "12": 0.4211,
+      "13": 0.5,
+      "14": 0.4884,
+      "15": 0.5429,
+      "16": 0.4103,
+      "17": 0.561,
+      "18": 0.6098,
+      "19": 0.4872,
+      "20": 0.48,
+      "21": 0.3958,
+      "22": 0.4419,
+      "23": 0.4091
+    },
+    "click_by_month": {
+      "1": 0.4694,
+      "2": 0.5188,
+      "3": 0.4744,
+      "4": 0.5034,
+      "5": 0.5374,
+      "6": 0.5,
+      "7": 0.495
+    },
+    "click_by_dow": {
+      "0": 0.5143,
+      "1": 0.4508,
+      "2": 0.5064,
+      "3": 0.5563,
+      "4": 0.4581,
+      "5": 0.5079,
+      "6": 0.5031
+    }
+  },
+  "categorical_features_dashboard": [
+    {
+      "feature": "Ad Topic Line",
+      "n_unique": 1000,
       "dtype": "str",
       "top_categories": [
         "Cloned 5thgeneration orchestration",
@@ -766,7 +1089,7 @@
     {
       "feature": "Timestamp",
       "n_unique": 1000,
-      "dtype": "str",
+      "dtype": "datetime64[us]",
       "top_categories": [
         "2016-03-27 00:53:11",
         "2016-04-04 01:39:02",
@@ -944,7 +1267,10 @@
       "Male": "1",
       "Country": "Barbados",
       "Timestamp": "2016-02-06 17:48:28",
-      "Clicked on Ad": "1"
+      "Clicked on Ad": "1",
+      "Hour": "17",
+      "Month": "2",
+      "DayOfWeek": "5"
     },
     {
       "Daily Time Spent on Site": "55.6",
@@ -956,7 +1282,10 @@
       "Male": "1",
       "Country": "Korea",
       "Timestamp": "2016-06-14 11:59:58",
-      "Clicked on Ad": "1"
+      "Clicked on Ad": "1",
+      "Hour": "11",
+      "Month": "6",
+      "DayOfWeek": "1"
     },
     {
       "Daily Time Spent on Site": "32.6",
@@ -968,7 +1297,10 @@
       "Male": "0",
       "Country": "Mayotte",
       "Timestamp": "2016-05-02 18:37:01",
-      "Clicked on Ad": "1"
+      "Clicked on Ad": "1",
+      "Hour": "18",
+      "Month": "5",
+      "DayOfWeek": "0"
     },
     {
       "Daily Time Spent on Site": "52.62",
@@ -980,7 +1312,10 @@
       "Male": "0",
       "Country": "Seychelles",
       "Timestamp": "2016-02-01 20:30:35",
-      "Clicked on Ad": "1"
+      "Clicked on Ad": "1",
+      "Hour": "20",
+      "Month": "2",
+      "DayOfWeek": "0"
     },
     {
       "Daily Time Spent on Site": "35.65",
@@ -992,7 +1327,10 @@
       "Male": "1",
       "Country": "Georgia",
       "Timestamp": "2016-05-10 07:22:37",
-      "Clicked on Ad": "1"
+      "Clicked on Ad": "1",
+      "Hour": "7",
+      "Month": "5",
+      "DayOfWeek": "1"
     },
     {
       "Daily Time Spent on Site": "53.22",
@@ -1004,7 +1342,10 @@
       "Male": "0",
       "Country": "United States Virgin Islands",
       "Timestamp": "2016-05-26 06:03:57",
-      "Clicked on Ad": "1"
+      "Clicked on Ad": "1",
+      "Hour": "6",
+      "Month": "5",
+      "DayOfWeek": "3"
     },
     {
       "Daily Time Spent on Site": "73.88",
@@ -1016,7 +1357,10 @@
       "Male": "0",
       "Country": "Saint Helena",
       "Timestamp": "2016-01-04 06:37:15",
-      "Clicked on Ad": "0"
+      "Clicked on Ad": "0",
+      "Hour": "6",
+      "Month": "1",
+      "DayOfWeek": "0"
     },
     {
       "Daily Time Spent on Site": "65.4",
@@ -1028,7 +1372,10 @@
       "Male": "0",
       "Country": "Palau",
       "Timestamp": "2016-02-12 22:51:08",
-      "Clicked on Ad": "0"
+      "Clicked on Ad": "0",
+      "Hour": "22",
+      "Month": "2",
+      "DayOfWeek": "4"
     },
     {
       "Daily Time Spent on Site": "76.76",
@@ -1040,7 +1387,10 @@
       "Male": "1",
       "Country": "Niue",
       "Timestamp": "2016-05-26 13:28:36",
-      "Clicked on Ad": "0"
+      "Clicked on Ad": "0",
+      "Hour": "13",
+      "Month": "5",
+      "DayOfWeek": "3"
     },
     {
       "Daily Time Spent on Site": "80.72",
@@ -1052,7 +1402,10 @@
       "Male": "0",
       "Country": "Costa Rica",
       "Timestamp": "2016-04-19 05:15:28",
-      "Clicked on Ad": "0"
+      "Clicked on Ad": "0",
+      "Hour": "5",
+      "Month": "4",
+      "DayOfWeek": "1"
     },
     {
       "Daily Time Spent on Site": "81.98",
@@ -1064,7 +1417,10 @@
       "Male": "0",
       "Country": "Seychelles",
       "Timestamp": "2016-04-15 11:51:14",
-      "Clicked on Ad": "0"
+      "Clicked on Ad": "0",
+      "Hour": "11",
+      "Month": "4",
+      "DayOfWeek": "4"
     },
     {
       "Daily Time Spent on Site": "75.81",
@@ -1076,7 +1432,35 @@
       "Male": "0",
       "Country": "Greenland",
       "Timestamp": "2016-03-27 19:50:11",
-      "Clicked on Ad": "0"
+      "Clicked on Ad": "0",
+      "Hour": "19",
+      "Month": "3",
+      "DayOfWeek": "6"
     }
-  ]
+  ],
+  "insights": {
+    "dataset_characteristics": [
+      "Dataset contains 1000 samples with 5 features",
+      "Target is perfectly balanced: 500 vs 500 (ratio 1.00:1)",
+      "No missing values found in any column",
+      "No duplicate rows detected",
+      "5 numerical + 4 categorical features"
+    ],
+    "key_findings": [
+      "Strongest predictor: Daily Internet Usage (r = -0.7865)",
+      "Second strongest: Daily Time Spent on Site (r = -0.7481)",
+      "Age positively correlated with clicking (r = 0.4925)",
+      "Gender (Male) shows virtually no predictive power (r = -0.0380)",
+      "Users who click: older, lower income, less internet usage, less time on site",
+      "Clear class separation in pairplot \u2192 simple classifiers could perform well"
+    ],
+    "preprocessing_suggestions": [
+      "Drop Ad Topic Line (near-unique text, high cardinality)",
+      "Drop City (too many unique values) or group by Country",
+      "Extract Hour, Month, DayOfWeek from Timestamp then drop Timestamp",
+      "Standardize numerical features before model training",
+      "Only 9 mild outliers \u2014 no aggressive capping needed",
+      "No imputation needed (0 missing values)"
+    ]
+  }
 }

@@ -154,7 +154,7 @@ sns.barplot(x=class_stats["classes"], y=class_stats["counts"], ax=ax, palette="v
 ax.set_title('SVHN Class Distribution')
 ax.set_xlabel('Digit Class')
 ax.set_ylabel('Number of Samples')
-class_fig_path = save_figure(fig, 'svhn_class_distribution.png')
+class_fig_path = save_figure(fig, 'image_class_distribution.png')
 print(f'🖼️ Class distribution figure saved: {class_fig_path}')
 
 
@@ -218,7 +218,7 @@ axes[1].bar(channels, stds, color=['#ef4444', '#22c55e', '#3b82f6'])
 axes[1].set_title('RGB Channel Standard Deviations')
 axes[1].set_ylabel('Std (normalized)')
 
-pixel_fig_path = save_figure(fig, 'svhn_pixel_statistics.png')
+pixel_fig_path = save_figure(fig, 'image_pixel_statistics.png')
 print(f'🖼️ Pixel statistics figure saved: {pixel_fig_path}')
 
 
@@ -274,7 +274,7 @@ invalid_share = 100.0 - valid_share
 axes[1].pie([valid_share, invalid_share], labels=['Valid', 'Invalid'], autopct='%1.1f%%', colors=['#22c55e', '#ef4444'])
 axes[1].set_title('Dimension Validation Status')
 
-dim_fig_path = save_figure(fig, 'svhn_dimension_validation.png')
+dim_fig_path = save_figure(fig, 'image_dimension_validation.png')
 print(f'🖼️ Dimension validation figure saved: {dim_fig_path}')
 
 
@@ -381,19 +381,166 @@ axes[1].set_title('Data Quality Percentage Checks')
 axes[1].set_ylabel('Percentage (%)')
 axes[1].set_ylim(0, 100)
 
-quality_fig_path = save_figure(fig, 'svhn_data_quality_assessment.png')
+quality_fig_path = save_figure(fig, 'image_data_quality_assessment.png')
 print(f'🖼️ Data quality figure saved: {quality_fig_path}')
 
 
 # ======================================================================
 # Markdown Cell 16
 # ======================================================================
-# ## 8. Generate Dashboard Data
+# ## 🔍 Image Duplicate Detection
+# 
+# Detect duplicate images using MD5 hashing for exact matches.
 
 
 # Code Cell 17
+import hashlib
+from collections import defaultdict
+import numpy as np
+
+print(f"\n{'='*60}")
+print("IMAGE DUPLICATE DETECTION")
+print(f"{'='*60}\n")
+
+# Method 1: MD5 Hash-based Exact Duplicate Detection
+print("Analyzing images for exact duplicates...")
+
+image_hashes = defaultdict(list)
+total_images = 0
+
+# Hash all images
+try:
+    # For numpy arrays (if images are already loaded)
+    if isinstance(X_train, np.ndarray):
+        print(f"Processing {len(X_train)} training images...")
+        for idx, img in enumerate(X_train):
+            # Convert image to bytes and hash
+            img_bytes = img.tobytes()
+            img_hash = hashlib.md5(img_bytes).hexdigest()
+            image_hashes[img_hash].append(('train', idx))
+            total_images += 1
+    
+    if 'X_test' in dir() and isinstance(X_test, np.ndarray):
+        print(f"Processing {len(X_test)} test images...")
+        for idx, img in enumerate(X_test):
+            img_bytes = img.tobytes()
+            img_hash = hashlib.md5(img_bytes).hexdigest()
+            image_hashes[img_hash].append(('test', idx))
+            total_images += 1
+
+    # Analyze duplicates
+    duplicate_hashes = {h: indices for h, indices in image_hashes.items() if len(indices) > 1}
+    duplicate_count = sum(len(indices) - 1 for indices in duplicate_hashes.values())
+    duplicate_pct = (duplicate_count / total_images * 100) if total_images > 0 else 0
+    
+    print(f"\nResults:")
+    print("-" * 60)
+    print(f"Total images processed: {total_images:,}")
+    print(f"Unique images: {len(image_hashes):,}")
+    print(f"Duplicate groups: {len(duplicate_hashes):,}")
+    print(f"Duplicate images: {duplicate_count:,} ({duplicate_pct:.2f}%)")
+    
+    # Show sample duplicates
+    if duplicate_hashes:
+        print(f"\nTop 5 Duplicate Groups:")
+        print("-" * 60)
+        for i, (hash_val, indices) in enumerate(list(duplicate_hashes.items())[:5], 1):
+            print(f"{i}. Hash: {hash_val[:16]}... - {len(indices)} occurrences")
+            for dataset, idx in indices[:3]:  # Show first 3
+                print(f"   - {dataset} set, index {idx}")
+    else:
+        print("\n✓ No exact duplicate images detected.")
+    
+    # Check for cross-set contamination (train/test duplicates)
+    cross_contamination = []
+    for hash_val, indices in duplicate_hashes.items():
+        datasets = set(ds for ds, _ in indices)
+        if len(datasets) > 1:
+            cross_contamination.append((hash_val, indices))
+    
+    if cross_contamination:
+        print(f"\n⚠️ WARNING: Train/Test Contamination Detected!")
+        print("-" * 60)
+        print(f"Found {len(cross_contamination)} images appearing in both train and test sets")
+        for hash_val, indices in cross_contamination[:3]:
+            print(f"  Hash: {hash_val[:16]}...")
+            for ds, idx in indices:
+                print(f"    - {ds}[{idx}]")
+    else:
+        print("\n✓ No train/test contamination detected.")
+
+except Exception as e:
+    print(f"Note: Could not perform duplicate detection - {str(e)}")
+    print("This check requires image data to be loaded as numpy arrays.")
+
+
+# ======================================================================
+# Markdown Cell 18
+# ======================================================================
+# ## 8. Generate Dashboard Data
+
+
+# Code Cell 19
+# Add image duplicate detection metrics to JSON export
+if 'svhn_eda_data' in dir():
+    # Calculate duplicate metrics
+    import hashlib
+    from collections import defaultdict
+    
+    try:
+        image_hashes = defaultdict(list)
+        total_images = 0
+        
+        # Hash training images
+        if isinstance(X_train, np.ndarray):
+            for idx, img in enumerate(X_train):
+                img_hash = hashlib.md5(img.tobytes()).hexdigest()
+                image_hashes[img_hash].append(('train', idx))
+                total_images += 1
+        
+        # Hash test images
+        if 'X_test' in dir() and isinstance(X_test, np.ndarray):
+            for idx, img in enumerate(X_test):
+                img_hash = hashlib.md5(img.tobytes()).hexdigest()
+                image_hashes[img_hash].append(('test', idx))
+                total_images += 1
+        
+        # Analyze duplicates
+        duplicate_hashes = {h: indices for h, indices in image_hashes.items() if len(indices) > 1}
+        duplicate_count = sum(len(indices) - 1 for indices in duplicate_hashes.values())
+        
+        # Check cross-contamination
+        cross_contamination = []
+        for hash_val, indices in duplicate_hashes.items():
+            datasets = set(ds for ds, _ in indices)
+            if len(datasets) > 1:
+                cross_contamination.append(hash_val)
+        
+        # Add to JSON
+        svhn_eda_data['duplicate_analysis'] = {
+            'total_images': total_images,
+            'unique_images': len(image_hashes),
+            'duplicate_groups': len(duplicate_hashes),
+            'duplicate_images': duplicate_count,
+            'duplicate_percentage': float((duplicate_count / total_images * 100) if total_images > 0 else 0),
+            'train_test_contamination': {
+                'affected_images': len(cross_contamination),
+                'has_contamination': len(cross_contamination) > 0
+            }
+        }
+        
+        print("✓ Image duplicate metrics added to JSON export")
+    except Exception as e:
+        svhn_eda_data['duplicate_analysis'] = {
+            'status': 'unavailable',
+            'reason': str(e)
+        }
+        print(f"⚠ Could not compute image duplicates: {e}")
+
+
+# Code Cell 20
 # Comprehensive data export for dashboard
-svhn_eda_data = {
+image_eda_data = {
     "dataset_overview": {
         "name": "SVHN",
         "task": "digit_classification",
@@ -413,19 +560,19 @@ svhn_eda_data = {
 }
 
 # Save main data file
-with open(os.path.join(OUTPUT_DIR, 'eda_svhn_data.json'), 'w') as f:
-    json.dump(svhn_eda_data, f, indent=2)
+with open(os.path.join(OUTPUT_DIR, 'eda_image_data.json'), 'w') as f:
+    json.dump(image_eda_data, f, indent=2)
 
-print(f'✅ Main data saved to {OUTPUT_DIR}/eda_svhn_data.json')
+print(f'✅ Main data saved to {OUTPUT_DIR}/eda_image_data.json')
 
 
 # ======================================================================
-# Markdown Cell 18
+# Markdown Cell 21
 # ======================================================================
 # ## 9. Generate Chart Data for Dashboard
 
 
-# Code Cell 19
+# Code Cell 22
 # Generate Chart.js compatible data
 chart_data = {
     "classChart": {
@@ -480,10 +627,10 @@ chart_data = {
 }
 
 # Save chart data
-with open(os.path.join(OUTPUT_DIR, 'eda_svhn_charts.json'), 'w') as f:
+with open(os.path.join(OUTPUT_DIR, 'eda_image_charts.json'), 'w') as f:
     json.dump(chart_data, f, indent=2)
 
-print(f'✅ Chart data saved to {OUTPUT_DIR}/eda_svhn_charts.json')
+print(f'✅ Chart data saved to {OUTPUT_DIR}/eda_image_charts.json')
 
 # Save a dashboard chart preview figure
 fig, axes = plt.subplots(2, 3, figsize=(16, 10))
@@ -518,17 +665,17 @@ axes[5].pie(
  )
 axes[5].set_title(chart_data['validationChart']['title'])
 
-preview_fig_path = save_figure(fig, 'svhn_dashboard_charts_preview.png')
+preview_fig_path = save_figure(fig, 'image_dashboard_charts_preview.png')
 print(f'🖼️ Dashboard preview figure saved: {preview_fig_path}')
 
 
 # ======================================================================
-# Markdown Cell 20
+# Markdown Cell 23
 # ======================================================================
 # ## 10. Generate Summary Report
 
 
-# Code Cell 21
+# Code Cell 24
 # Generate human-readable summary report
 report_lines = [
     "=" * 70,
@@ -537,11 +684,11 @@ report_lines = [
     "=" * 70,
     "",
     "📊 DATASET OVERVIEW:",
-    f"   • Total Images: {svhn_eda_data['dataset_overview']['total_images']:,}",
-    f"   • Training Set: {svhn_eda_data['dataset_overview']['train_samples']:,}",
-    f"   • Test Set: {svhn_eda_data['dataset_overview']['test_samples']:,}",
-    f"   • Classes: {svhn_eda_data['dataset_overview']['num_classes']}",
-    f"   • Image Size: {svhn_eda_data['dataset_overview']['image_shape']}",
+    f"   • Total Images: {image_eda_data['dataset_overview']['total_images']:,}",
+    f"   • Training Set: {image_eda_data['dataset_overview']['train_samples']:,}",
+    f"   • Test Set: {image_eda_data['dataset_overview']['test_samples']:,}",
+    f"   • Classes: {image_eda_data['dataset_overview']['num_classes']}",
+    f"   • Image Size: {image_eda_data['dataset_overview']['image_shape']}",
     "",
     "🔢 CLASS DISTRIBUTION:",
     f"   • Most Common Digit: {class_stats['classes'][np.argmax(class_stats['counts'])]} ({max(class_stats['counts']):,} samples)",
@@ -564,8 +711,8 @@ report_lines = [
     f"   • Saved to: {SAMPLE_DIR}/",
     "",
     "📈 DASHBOARD FILES:",
-    f"   • Main Data: {OUTPUT_DIR}/eda_svhn_data.json",
-    f"   • Chart Data: {OUTPUT_DIR}/eda_svhn_charts.json",
+    f"   • Main Data: {OUTPUT_DIR}/eda_image_data.json",
+    f"   • Chart Data: {OUTPUT_DIR}/eda_image_charts.json",
     f"   • Sample Images: {SAMPLE_DIR}/",
     "",
     "" + "=" * 70
@@ -574,10 +721,10 @@ report_lines = [
 report_content = "\n".join(report_lines)
 
 # Save report
-with open(os.path.join(OUTPUT_DIR, 'eda_svhn_report.txt'), 'w') as f:
+with open(os.path.join(OUTPUT_DIR, 'eda_image_report.txt'), 'w') as f:
     f.write(report_content)
 
 print(report_content)
-print(f'\n📝 Report saved to {OUTPUT_DIR}/eda_svhn_report.txt')
+print(f'\n📝 Report saved to {OUTPUT_DIR}/eda_image_report.txt')
 print('\n🎉 SVHN EDA analysis complete! All dashboard data generated successfully.')
 

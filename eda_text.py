@@ -21,6 +21,52 @@
 
 
 # Code Cell 3
+# Enhanced duplicate detection metrics for JSON export
+if 'json_data' in dir() or 'eda_data' in dir():
+    data_dict = json_data if 'json_data' in dir() else eda_data
+    
+    # Update with comprehensive duplicate metrics
+    data_dict['duplicate_analysis'] = {
+        'questions': {
+            'total_duplicates': int(df['question'].duplicated().sum()),
+            'unique_count': int(df['question'].nunique()),
+            'duplicate_percentage': float((df['question'].duplicated().sum() / len(df)) * 100)
+        }
+    }
+    
+    # Contexts
+    if 'context' in df.columns:
+        data_dict['duplicate_analysis']['contexts'] = {
+            'total_duplicates': int(df['context'].duplicated().sum()),
+            'unique_count': int(df['context'].nunique()),
+            'duplicate_percentage': float((df['context'].duplicated().sum() / len(df)) * 100)
+        }
+    
+    # Answers
+    answer_col = None
+    for col in ['answer', 'answer_text', 'answers']:
+        if col in df.columns:
+            answer_col = col
+            break
+    
+    if answer_col:
+        data_dict['duplicate_analysis']['answers'] = {
+            'total_duplicates': int(df[answer_col].duplicated().sum()),
+            'unique_count': int(df[answer_col].nunique()),
+            'duplicate_percentage': float((df[answer_col].duplicated().sum() / len(df)) * 100)
+        }
+    
+    # Complete rows
+    data_dict['duplicate_analysis']['complete_rows'] = {
+        'total_duplicates': int(df.duplicated().sum()),
+        'unique_rows': int(len(df) - df.duplicated().sum()),
+        'duplicate_percentage': float((df.duplicated().sum() / len(df)) * 100)
+    }
+    
+    print("✓ Enhanced duplicate metrics added to JSON export")
+
+
+# Code Cell 4
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -69,7 +115,7 @@ STOP_WORDS = set(stopwords.words('english'))
 print('✅ Setup complete!')
 
 
-# Code Cell 4
+# Code Cell 5
 print('📥 Downloading SQuAD 1.1 from HuggingFace...')
 dataset = load_dataset('rajpurkar/squad')
 
@@ -100,7 +146,7 @@ print(f'✅ Loaded {len(df)} QA pairs')
 
 
 # ======================================================================
-# Markdown Cell 5
+# Markdown Cell 6
 # ======================================================================
 # ## 1. 📚 Analysis Methodology
 # 
@@ -116,12 +162,12 @@ print(f'✅ Loaded {len(df)} QA pairs')
 
 
 # ======================================================================
-# Markdown Cell 6
+# Markdown Cell 7
 # ======================================================================
 # ## 2. 📊 Dataset Overview
 
 
-# Code Cell 7
+# Code Cell 8
 log('=== SECTION 2: DATASET OVERVIEW ===')
 
 n_total = len(df)
@@ -170,7 +216,82 @@ df[['title', 'context', 'question', 'answer_text']].head(3)
 
 
 # ======================================================================
-# Markdown Cell 8
+# Markdown Cell 9
+# ======================================================================
+# ## 🔍 Enhanced Duplicate Detection
+# 
+# Comprehensive duplicate analysis across questions, contexts, and answers.
+
+
+# Code Cell 10
+# Enhanced Duplicate Detection for Text Data
+print(f"\n{'='*60}")
+print("COMPREHENSIVE DUPLICATE DETECTION")
+print(f"{'='*60}\n")
+
+# 1. Duplicate Questions (already exists, but enhance)
+dup_questions = df['question'].duplicated().sum()
+dup_q_pct = (dup_questions / len(df)) * 100
+print(f"1. DUPLICATE QUESTIONS:")
+print(f"   Total: {dup_questions:,} ({dup_q_pct:.2f}%)")
+print(f"   Unique questions: {df['question'].nunique():,}\n")
+
+# 2. Duplicate Contexts
+if 'context' in df.columns:
+    dup_contexts = df['context'].duplicated().sum()
+    dup_c_pct = (dup_contexts / len(df)) * 100
+    print(f"2. DUPLICATE CONTEXTS:")
+    print(f"   Total: {dup_contexts:,} ({dup_c_pct:.2f}%)")
+    print(f"   Unique contexts: {df['context'].nunique():,}\n")
+
+# 3. Duplicate Answers
+answer_col = None
+for col in ['answer', 'answer_text', 'answers']:
+    if col in df.columns:
+        answer_col = col
+        break
+
+if answer_col:
+    dup_answers = df[answer_col].duplicated().sum()
+    dup_a_pct = (dup_answers / len(df)) * 100
+    print(f"3. DUPLICATE ANSWERS:")
+    print(f"   Total: {dup_answers:,} ({dup_a_pct:.2f}%)")
+    print(f"   Unique answers: {df[answer_col].nunique():,}\n")
+
+# 4. Duplicate Titles (if exists)
+if 'title' in df.columns:
+    dup_titles = df['title'].duplicated().sum()
+    dup_t_pct = (dup_titles / len(df)) * 100
+    print(f"4. DUPLICATE TITLES:")
+    print(f"   Total: {dup_titles:,} ({dup_t_pct:.2f}%)")
+    print(f"   Unique titles: {df['title'].nunique():,}\n")
+
+# 5. Exact duplicate QA pairs
+if 'question' in df.columns and answer_col:
+    qa_pairs = df[['question', answer_col]].duplicated().sum()
+    qa_pct = (qa_pairs / len(df)) * 100
+    print(f"5. DUPLICATE QUESTION-ANSWER PAIRS:")
+    print(f"   Total: {qa_pairs:,} ({qa_pct:.2f}%)\n")
+
+# 6. Complete duplicate rows
+complete_dups = df.duplicated().sum()
+complete_pct = (complete_dups / len(df)) * 100
+print(f"6. COMPLETE DUPLICATE ROWS:")
+print(f"   Total: {complete_dups:,} ({complete_pct:.2f}%)")
+print(f"   Unique rows: {len(df) - complete_dups:,}\n")
+
+# Show most duplicated questions
+if dup_questions > 0:
+    print("\nTop 5 Most Duplicated Questions:")
+    print("-" * 60)
+    top_dup_q = df['question'].value_counts().head(5)
+    for i, (question, count) in enumerate(top_dup_q.items(), 1):
+        if count > 1:
+            print(f"{i}. [{count}x] {question[:80]}..." if len(question) > 80 else f"{i}. [{count}x] {question}")
+
+
+# ======================================================================
+# Markdown Cell 11
 # ======================================================================
 # ## 3. 📊 Category Distribution
 # 
@@ -179,7 +300,7 @@ df[['title', 'context', 'question', 'answer_text']].head(3)
 # - **Article Topic** (title)
 
 
-# Code Cell 9
+# Code Cell 12
 log('\n=== SECTION 3: CATEGORY DISTRIBUTION ===')
 
 # --- Question Type Distribution ---
@@ -240,12 +361,12 @@ plt.show()
 
 
 # ======================================================================
-# Markdown Cell 10
+# Markdown Cell 13
 # ======================================================================
 # ## 4. 📏 Text Length Analysis
 
 
-# Code Cell 11
+# Code Cell 14
 log('\n=== SECTION 4: TEXT LENGTH ANALYSIS ===')
 
 length_stats = {}
@@ -321,12 +442,12 @@ pd.DataFrame(summary_rows)
 
 
 # ======================================================================
-# Markdown Cell 12
+# Markdown Cell 15
 # ======================================================================
 # ## 5. 🔤 Word Frequency / Lexical Analysis
 
 
-# Code Cell 13
+# Code Cell 16
 log('\n=== SECTION 5: WORD FREQUENCY ANALYSIS ===')
 
 def tokenize_clean(texts, stop_words=STOP_WORDS, min_len=3):
@@ -411,12 +532,12 @@ plt.show()
 
 
 # ======================================================================
-# Markdown Cell 14
+# Markdown Cell 17
 # ======================================================================
 # ## 6. 📊 N-gram Analysis
 
 
-# Code Cell 15
+# Code Cell 18
 log('\n=== SECTION 6: N-GRAM ANALYSIS ===')
 
 def get_ngrams(texts, n, stop_words=STOP_WORDS, top_k=20):
@@ -482,12 +603,12 @@ plt.show()
 
 
 # ======================================================================
-# Markdown Cell 16
+# Markdown Cell 19
 # ======================================================================
 # ## 7. 🎯 Category-Specific Analysis
 
 
-# Code Cell 17
+# Code Cell 20
 log('\n=== SECTION 7: CATEGORY-SPECIFIC ANALYSIS ===')
 
 # --- Top words per question type ---
@@ -560,12 +681,12 @@ plt.show()
 
 
 # ======================================================================
-# Markdown Cell 18
+# Markdown Cell 21
 # ======================================================================
 # ## 8. 💡 Key Insights & Suggestions
 
 
-# Code Cell 19
+# Code Cell 22
 log('\n=== SECTION 8: KEY INSIGHTS ===')
 
 insights = {

@@ -21,6 +21,41 @@
 
 
 # Code Cell 3
+# Add duplicate detection metrics to JSON export
+if 'json_data' in dir() or 'eda_data' in dir():
+    data_dict = json_data if 'json_data' in dir() else eda_data
+    
+    # Add duplicate metrics
+    data_dict['duplicate_analysis'] = {
+        'total_rows': len(df),
+        'duplicate_rows': int(df.duplicated().sum()),
+        'duplicate_percentage': float((df.duplicated().sum() / len(df)) * 100),
+        'unique_rows': int(len(df) - df.duplicated().sum()),
+    }
+    
+    # Column-specific duplicates
+    data_dict['duplicate_analysis']['by_column'] = {}
+    key_columns = ['City', 'Country', 'Ad Topic Line']
+    for col in key_columns:
+        if col in df.columns:
+            data_dict['duplicate_analysis']['by_column'][col] = {
+                'unique_values': int(df[col].nunique()),
+                'duplicate_entries': int(df[col].duplicated().sum()),
+                'duplicate_percentage': float((df[col].duplicated().sum() / len(df)) * 100)
+            }
+    
+    # Demographics duplicates
+    demo_cols = ['Age', 'Gender', 'Country']
+    if all(col in df.columns for col in demo_cols):
+        data_dict['duplicate_analysis']['demographics'] = {
+            'duplicate_combinations': int(df[demo_cols].duplicated().sum()),
+            'duplicate_percentage': float((df[demo_cols].duplicated().sum() / len(df)) * 100)
+        }
+    
+    print("✓ Duplicate metrics added to JSON export")
+
+
+# Code Cell 4
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -60,7 +95,7 @@ print('✅ Setup complete!')
 
 
 # ======================================================================
-# Markdown Cell 4
+# Markdown Cell 5
 # ======================================================================
 # ## 1. 📚 Analysis Methodology
 # 
@@ -76,12 +111,12 @@ print('✅ Setup complete!')
 
 
 # ======================================================================
-# Markdown Cell 5
+# Markdown Cell 6
 # ======================================================================
 # ## 2. 📊 Dataset Overview
 
 
-# Code Cell 6
+# Code Cell 7
 df = pd.read_csv('advertising.csv')
 
 # --- Stats Grid ---
@@ -146,12 +181,12 @@ df.head()
 
 
 # ======================================================================
-# Markdown Cell 7
+# Markdown Cell 8
 # ======================================================================
 # ## 3. 🔍 Missing Values Analysis
 
 
-# Code Cell 8
+# Code Cell 9
 log('\n=== SECTION 3: MISSING VALUES ANALYSIS ===')
 
 missing_count = df.isnull().sum()
@@ -201,12 +236,66 @@ missing_df
 
 
 # ======================================================================
-# Markdown Cell 9
+# Markdown Cell 10
+# ======================================================================
+# ## 🔍 Duplicate Detection
+# 
+# Comprehensive duplicate analysis for data quality assessment.
+
+
+# Code Cell 11
+# Duplicate Row Detection
+duplicate_rows = df.duplicated()
+duplicate_count = duplicate_rows.sum()
+duplicate_pct = (duplicate_count / len(df)) * 100
+
+print(f"\n{'='*60}")
+print("DUPLICATE DETECTION ANALYSIS")
+print(f"{'='*60}\n")
+
+print(f"Total Rows: {len(df):,}")
+print(f"Duplicate Rows: {duplicate_count:,} ({duplicate_pct:.2f}%)")
+print(f"Unique Rows: {len(df) - duplicate_count:,}\n")
+
+# Column-specific duplicate detection
+print("\nDuplicate Analysis by Key Columns:")
+print("-" * 60)
+
+key_columns = ['City', 'Country', 'Ad Topic Line']
+for col in key_columns:
+    if col in df.columns:
+        col_duplicates = df[col].duplicated().sum()
+        col_dup_pct = (col_duplicates / len(df)) * 100
+        unique_vals = df[col].nunique()
+        print(f"  {col}:")
+        print(f"    - Unique values: {unique_vals:,}")
+        print(f"    - Duplicate entries: {col_duplicates:,} ({col_dup_pct:.2f}%)")
+
+# Subset duplicate detection (demographic duplicates)
+demo_cols = ['Age', 'Gender', 'Country']
+if all(col in df.columns for col in demo_cols):
+    demo_duplicates = df[demo_cols].duplicated().sum()
+    demo_dup_pct = (demo_duplicates / len(df)) * 100
+    print(f"\n  Duplicate Demographics ({', '.join(demo_cols)}):")
+    print(f"    - Count: {demo_duplicates:,} ({demo_dup_pct:.2f}%)")
+
+# Show sample duplicates if any exist
+if duplicate_count > 0:
+    print(f"\n\nSample Duplicate Rows (first 5):")
+    print("-" * 60)
+    duplicate_samples = df[duplicate_rows].head(5)
+    print(duplicate_samples.to_string())
+else:
+    print("\n✓ No exact duplicate rows detected in the dataset.")
+
+
+# ======================================================================
+# Markdown Cell 12
 # ======================================================================
 # ## 4. 📈 Numerical Features Distribution
 
 
-# Code Cell 10
+# Code Cell 13
 log('\n=== SECTION 4: NUMERICAL FEATURES DISTRIBUTION ===')
 
 num_stats = []
@@ -264,12 +353,12 @@ stats_df
 
 
 # ======================================================================
-# Markdown Cell 11
+# Markdown Cell 14
 # ======================================================================
 # ## 5. 📊 Categorical Features Distribution
 
 
-# Code Cell 12
+# Code Cell 15
 log('\n=== SECTION 5: CATEGORICAL FEATURES DISTRIBUTION ===')
 
 cat_stats = []
@@ -323,12 +412,12 @@ cat_summary
 
 
 # ======================================================================
-# Markdown Cell 13
+# Markdown Cell 16
 # ======================================================================
 # ## 6. 🎯 Target Variable Distribution
 
 
-# Code Cell 14
+# Code Cell 17
 log('\n=== SECTION 6: TARGET VARIABLE DISTRIBUTION ===')
 
 target_stats = {
@@ -374,12 +463,12 @@ plt.show()
 
 
 # ======================================================================
-# Markdown Cell 15
+# Markdown Cell 18
 # ======================================================================
 # ## 7. 🔗 Correlation Analysis
 
 
-# Code Cell 16
+# Code Cell 19
 log('\n=== SECTION 7: CORRELATION ANALYSIS ===')
 
 # Include target in correlation
@@ -426,12 +515,12 @@ plt.show()
 
 
 # ======================================================================
-# Markdown Cell 17
+# Markdown Cell 20
 # ======================================================================
 # ## 8. 📦 Outlier Detection (IQR Method)
 
 
-# Code Cell 18
+# Code Cell 21
 log('\n=== SECTION 8: OUTLIER DETECTION (IQR) ===')
 
 outlier_stats = []
@@ -501,12 +590,12 @@ outlier_df
 
 
 # ======================================================================
-# Markdown Cell 19
+# Markdown Cell 22
 # ======================================================================
 # ## 9. 🎯 Target vs Features Analysis
 
 
-# Code Cell 20
+# Code Cell 23
 log('\n=== SECTION 9: TARGET vs FEATURES ===')
 
 # --- Numerical: Boxplot by target ---
@@ -548,7 +637,7 @@ json_data['target_vs_numerical'] = target_vs_numerical
 save_json()
 
 
-# Code Cell 21
+# Code Cell 24
 # --- Categorical: Cross-tabulation ---
 log('\n  Categorical cross-tabulation with target:')
 
@@ -592,12 +681,12 @@ save_json()
 
 
 # ======================================================================
-# Markdown Cell 22
+# Markdown Cell 25
 # ======================================================================
 # ## 10. 🕐 Temporal Analysis (Bonus)
 
 
-# Code Cell 23
+# Code Cell 26
 log('\n=== SECTION 10: TEMPORAL ANALYSIS ===')
 
 df['Timestamp'] = pd.to_datetime(df['Timestamp'])
@@ -646,19 +735,19 @@ plt.show()
 
 
 # ======================================================================
-# Markdown Cell 24
+# Markdown Cell 27
 # ======================================================================
 # ## 11. 💡 Key Insights & Suggestions
 
 
 # ======================================================================
-# Markdown Cell 25
+# Markdown Cell 28
 # ======================================================================
 # ## 8. Categorical Features Analysis
 # **Generate detailed analysis for categoricalChart and dashboard tables**
 
 
-# Code Cell 26
+# Code Cell 29
 # === 8. CATEGORICAL FEATURES ANALYSIS (DASHBOARD-FRIENDLY) ===
 categorical_features = []
 
@@ -703,13 +792,13 @@ log(f'\n✅ Categorical features analysis complete: {len(categorical_features)} 
 
 
 # ======================================================================
-# Markdown Cell 27
+# Markdown Cell 30
 # ======================================================================
 # ## 9. Correlation Matrix Analysis
 # **Generate correlation matrix for corrHeatmap and high-correlation pairs**
 
 
-# Code Cell 28
+# Code Cell 31
 # === 9. CORRELATION MATRIX ANALYSIS (DASHBOARD-FRIENDLY) ===
 
 log('\n' + '=' * 70)
@@ -758,13 +847,13 @@ log('\n✅ Correlation matrix analysis complete')
 
 
 # ======================================================================
-# Markdown Cell 29
+# Markdown Cell 32
 # ======================================================================
 # ## 10. Target vs Features Analysis
 # **Generate cross-tabulation for targetVsChart**
 
 
-# Code Cell 30
+# Code Cell 33
 # === 10. TARGET VS FEATURES ANALYSIS (DASHBOARD-FRIENDLY) ===
 
 log('\n' + '=' * 70)
@@ -804,13 +893,13 @@ log('\n✅ Target vs features analysis complete')
 
 
 # ======================================================================
-# Markdown Cell 31
+# Markdown Cell 34
 # ======================================================================
 # ## 11. Sample Data Rows
 # **Generate sample rows for data table display**
 
 
-# Code Cell 32
+# Code Cell 35
 # === 11. SAMPLE DATA ROWS ===
 
 log('\n' + '=' * 70)
@@ -859,7 +948,7 @@ save_json()
 log('\n✅ Sample data rows generation complete')
 
 
-# Code Cell 33
+# Code Cell 36
 log('\n=== SECTION 11: KEY INSIGHTS ===')
 
 insights = {

@@ -22,6 +22,55 @@
 
 
 # Code Cell 3
+# Add multimodal duplicate detection metrics to JSON export
+if 'eda_data' in dir() or 'json_data' in dir():
+    data_dict = eda_data if 'eda_data' in dir() else json_data
+    
+    # Image-level duplicates
+    if 'image' in df.columns:
+        image_counts = df['image'].value_counts()
+        images_with_multiple_captions = image_counts[image_counts > 1]
+        
+        # Image-caption pair duplicates
+        if 'caption' in df.columns:
+            pair_duplicates = df[['image', 'caption']].duplicated().sum()
+        else:
+            pair_duplicates = 0
+        
+        # Add/update duplicate analysis
+        if 'duplicate_analysis' not in data_dict:
+            data_dict['duplicate_analysis'] = {}
+        
+        data_dict['duplicate_analysis']['images'] = {
+            'total_unique_images': int(df['image'].nunique()),
+            'images_with_multiple_captions': int(len(images_with_multiple_captions)),
+            'avg_captions_per_image': float(image_counts.mean()),
+            'max_captions_per_image': int(image_counts.max()),
+            'image_caption_pair_duplicates': int(pair_duplicates),
+            'pair_duplicate_percentage': float((pair_duplicates / len(df)) * 100) if len(df) > 0 else 0
+        }
+        
+        print("✓ Image-level duplicate metrics added to JSON export")
+    
+    # Caption duplicates (may already exist, but ensure consistency)
+    if 'caption' in df.columns or 'caption_normalized' in df.columns:
+        caption_col = 'caption_normalized' if 'caption_normalized' in df.columns else 'caption'
+        
+        if 'duplicate_analysis' not in data_dict:
+            data_dict['duplicate_analysis'] = {}
+        
+        # Only add if not already present
+        if 'captions' not in data_dict['duplicate_analysis']:
+            data_dict['duplicate_analysis']['captions'] = {
+                'exact_duplicates': int(df[caption_col].duplicated().sum()),
+                'exact_duplicate_percentage': float((df[caption_col].duplicated().sum() / len(df)) * 100),
+                'unique_captions': int(df[caption_col].nunique())
+            }
+        
+        print("✓ Caption duplicate metrics ensured in JSON export")
+
+
+# Code Cell 4
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -69,14 +118,14 @@ print('✅ Setup complete!')
 
 
 # ======================================================================
-# Markdown Cell 4
+# Markdown Cell 5
 # ======================================================================
 # ### Auto-Download Flickr8k
 # Requires Kaggle API token at `~/.kaggle/kaggle.json`. 
 # See [setup guide](https://www.kaggle.com/settings).
 
 
-# Code Cell 5
+# Code Cell 6
 DATASET_DIR = 'flickr8k'
 IMAGES_DIR = os.path.join(DATASET_DIR, 'Images')
 CAPTIONS_FILE = os.path.join(DATASET_DIR, 'captions.txt')
@@ -102,7 +151,7 @@ print(f'✅ Loaded {len(df)} caption rows, {len(image_files)} image files')
 
 
 # ======================================================================
-# Markdown Cell 6
+# Markdown Cell 7
 # ======================================================================
 # ## 1. 📚 Analysis Methodology
 # 
@@ -118,12 +167,12 @@ print(f'✅ Loaded {len(df)} caption rows, {len(image_files)} image files')
 
 
 # ======================================================================
-# Markdown Cell 7
+# Markdown Cell 8
 # ======================================================================
 # ## 2. 📊 Dataset Overview
 
 
-# Code Cell 8
+# Code Cell 9
 log('=== SECTION 2: DATASET OVERVIEW ===')
 
 n_total_pairs = len(df)
@@ -175,12 +224,12 @@ df.head()
 
 
 # ======================================================================
-# Markdown Cell 9
+# Markdown Cell 10
 # ======================================================================
 # ## 3. 🔍 Data Quality & Missing Modalities
 
 
-# Code Cell 10
+# Code Cell 11
 log('\n=== SECTION 3: DATA QUALITY & MISSING MODALITIES ===')
 
 # Check which images in captions actually exist on disk
@@ -244,12 +293,12 @@ plt.show()
 
 
 # ======================================================================
-# Markdown Cell 11
+# Markdown Cell 12
 # ======================================================================
 # ## 4. 🖼️ Visual Modality Analysis
 
 
-# Code Cell 12
+# Code Cell 13
 log('\n=== SECTION 4: VISUAL MODALITY ANALYSIS ===')
 
 # Collect image properties
@@ -338,7 +387,7 @@ plt.savefig('multimodal_02_image_dimensions.png', dpi=150, bbox_inches='tight')
 plt.show()
 
 
-# Code Cell 13
+# Code Cell 14
 # --- Charts: Color & Brightness ---
 fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
@@ -362,12 +411,12 @@ plt.show()
 
 
 # ======================================================================
-# Markdown Cell 14
+# Markdown Cell 15
 # ======================================================================
 # ## 5. 📝 Textual Modality Analysis
 
 
-# Code Cell 15
+# Code Cell 16
 log('\n=== SECTION 5: TEXTUAL MODALITY ANALYSIS ===')
 
 df['caption_word_count'] = df['caption'].apply(lambda x: len(str(x).split()))
@@ -490,12 +539,12 @@ plt.show()
 
 
 # ======================================================================
-# Markdown Cell 16
+# Markdown Cell 17
 # ======================================================================
 # ## 6. 🔗 Cross-Modal Analysis
 
 
-# Code Cell 17
+# Code Cell 18
 log('\n=== SECTION 6: CROSS-MODAL ANALYSIS ===')
 
 # --- Caption Similarity (Jaccard) ---
@@ -631,12 +680,12 @@ plt.show()
 
 
 # ======================================================================
-# Markdown Cell 18
+# Markdown Cell 19
 # ======================================================================
 # ## 7. 🎯 Target/Label Distribution
 
 
-# Code Cell 19
+# Code Cell 20
 log('\n=== SECTION 7: TARGET/LABEL DISTRIBUTION ===')
 
 # Flickr8k doesn't have explicit labels, so we analyze:
@@ -714,12 +763,12 @@ plt.show()
 
 
 # ======================================================================
-# Markdown Cell 20
+# Markdown Cell 21
 # ======================================================================
 # ## 8. 🖼️ Sample Multimodal Pairs
 
 
-# Code Cell 21
+# Code Cell 22
 log('\n=== SECTION 8: SAMPLE MULTIMODAL PAIRS ===')
 
 np.random.seed(42)
@@ -756,12 +805,12 @@ plt.show()
 
 
 # ======================================================================
-# Markdown Cell 22
+# Markdown Cell 23
 # ======================================================================
 # ## 9A. 🏷️ POS Tag Distribution Analysis
 
 
-# Code Cell 23
+# Code Cell 24
 log('\n=== SECTION 9A: POS TAG DISTRIBUTION ===')
 
 # Install spacy model if needed
@@ -830,12 +879,12 @@ print(f'✅ POS analysis complete: {len(pos_data)} tags found')
 
 
 # ======================================================================
-# Markdown Cell 24
+# Markdown Cell 25
 # ======================================================================
 # ## 9B. 🔄 Duplicate Captions Detection
 
 
-# Code Cell 25
+# Code Cell 26
 log('\n=== SECTION 9B: DUPLICATE CAPTIONS ===')
 
 # Normalize captions for comparison
@@ -880,12 +929,93 @@ print(f'✅ Duplicate analysis complete')
 
 
 # ======================================================================
-# Markdown Cell 26
+# Markdown Cell 27
+# ======================================================================
+# ## 🔍 Image-Level Duplicate Detection
+# 
+# Detect duplicate images using hash-based methods (complements existing caption duplicate detection).
+
+
+# Code Cell 28
+import hashlib
+from collections import defaultdict
+
+print(f"\n{'='*60}")
+print("IMAGE-LEVEL DUPLICATE DETECTION")
+print(f"{'='*60}\n")
+
+# Method 1: Hash-based duplicate detection on image filenames/IDs
+print("Analyzing image identifiers for duplicates...\n")
+
+if 'image' in df.columns:
+    # Duplicate image IDs (same image with multiple captions)
+    image_counts = df['image'].value_counts()
+    images_with_multiple_captions = image_counts[image_counts > 1]
+    
+    print(f"1. IMAGE IDENTIFIER DUPLICATES:")
+    print(f"   Total unique images: {df['image'].nunique():,}")
+    print(f"   Images with multiple captions: {len(images_with_multiple_captions):,}")
+    print(f"   Average captions per image: {df['image'].value_counts().mean():.2f}")
+    print(f"   Max captions for single image: {image_counts.max()}\n")
+    
+    # Show top images with most captions
+    if len(images_with_multiple_captions) > 0:
+        print("   Top 5 Images with Most Captions:")
+        for i, (img_id, count) in enumerate(images_with_multiple_captions.head(5).items(), 1):
+            print(f"   {i}. Image '{img_id}': {count} captions")
+        print()
+
+# Method 2: Check for image file hash duplicates (if image paths/files available)
+print(f"2. IMAGE FILE DUPLICATE CHECK:")
+try:
+    # If we have actual image file paths
+    if 'image_path' in df.columns or 'image_file' in df.columns:
+        path_col = 'image_path' if 'image_path' in df.columns else 'image_file'
+        
+        # Check for duplicate file paths
+        duplicate_paths = df[path_col].duplicated().sum()
+        print(f"   Duplicate file paths: {duplicate_paths:,}")
+        
+        if duplicate_paths > 0:
+            print(f"   ⚠️ Warning: {duplicate_paths} rows reference the same image files")
+    else:
+        print("   Note: No image file paths available for hash-based duplicate detection")
+        print("   Image-level duplicates are tracked via image identifiers (above)")
+except Exception as e:
+    print(f"   Unable to check file hashes: {str(e)}")
+
+print(f"\n3. IMAGE-CAPTION PAIR DUPLICATES:")
+if 'image' in df.columns and 'caption' in df.columns:
+    # Check for exact duplicate (image_id, caption) pairs
+    pair_duplicates = df[['image', 'caption']].duplicated().sum()
+    pair_dup_pct = (pair_duplicates / len(df)) * 100
+    
+    print(f"   Exact duplicate (image, caption) pairs: {pair_duplicates:,} ({pair_dup_pct:.2f}%)")
+    
+    if pair_duplicates > 0:
+        print(f"   ⚠️ Warning: Same image-caption combinations appear multiple times")
+        # Show examples
+        dup_pairs = df[df[['image', 'caption']].duplicated(keep=False)]
+        print(f"\n   Sample duplicate pairs:")
+        sample = dup_pairs.groupby(['image', 'caption']).size().head(3)
+        for (img, cap), count in sample.items():
+            cap_preview = cap[:60] + '...' if len(cap) > 60 else cap
+            print(f"   - Image '{img}' + \"{cap_preview}\" appears {count}x")
+    else:
+        print(f"   ✓ No duplicate image-caption pairs found")
+
+print(f"\n{'='*60}")
+print("IMAGE DUPLICATE ANALYSIS COMPLETE")
+print(f"{'='*60}")
+
+
+# ======================================================================
+# Markdown Cell 29
 # ======================================================================
 # ## 9C. 📏 Outlier Captions Detection
 
 
-# Code Cell 27
+# Code Cell 30
 log('\n=== SECTION 9C: OUTLIER CAPTIONS ===')
 
 wc = df['caption_word_count']
@@ -932,12 +1062,12 @@ print(f'✅ Outlier detection complete: {len(all_outliers)} outliers found')
 
 
 # ======================================================================
-# Markdown Cell 28
+# Markdown Cell 31
 # ======================================================================
 # ## 9D. ⚖️ Gender Bias Analysis
 
 
-# Code Cell 29
+# Code Cell 32
 log('\n=== SECTION 9D: GENDER BIAS ANALYSIS ===')
 
 male_words = ['man', 'men', 'boy', 'boys', 'male', 'he', 'his', 'him',
@@ -1025,12 +1155,12 @@ print(f'✅ Gender bias analysis complete: ratio = {bias_ratio}x (male/female)')
 
 
 # ======================================================================
-# Markdown Cell 30
+# Markdown Cell 33
 # ======================================================================
 # ## 10. 💡 Key Insights & Preprocessing Suggestions (Updated)
 
 
-# Code Cell 31
+# Code Cell 34
 log('\n=== SECTION 10: KEY INSIGHTS (UPDATED) ===')
 
 insights = {

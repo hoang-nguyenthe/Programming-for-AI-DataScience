@@ -1,0 +1,146 @@
+======================================================================
+EDA TEXT STATS — SQuAD 1.1
+======================================================================
+
+=== SECTION 2: DATASET OVERVIEW ===
+Total QA pairs: 98169
+Training set: 87599
+Validation set: 10570
+Unique articles (titles): 490
+Unique context paragraphs: 20958
+Avg questions per article: 200.3
+Avg questions per context: 4.7
+Question type categories: 9
+
+Missing values: 0 total
+Duplicate questions: 281
+
+=== SECTION 3: CATEGORY DISTRIBUTION ===
+Question Type Distribution:
+  What: 42342 (43.13%)
+  Other: 16765 (17.08%)
+  How: 9214 (9.39%)
+  Who: 9209 (9.38%)
+  When: 6155 (6.27%)
+  In: 4795 (4.88%)
+  Which: 4613 (4.7%)
+  Where: 3724 (3.79%)
+  Why: 1352 (1.38%)
+  Imbalance ratio (question types): 31.32x
+
+Top 15 Article Topics:
+  New_York_City: 817 questions
+  Super_Bowl_50: 810 questions
+  American_Idol: 802 questions
+  Beyoncé: 758 questions
+  Frédéric_Chopin: 697 questions
+  Queen_Victoria: 680 questions
+  Buddhism: 610 questions
+  New_Haven,_Connecticut: 602 questions
+  2008_Sichuan_earthquake: 521 questions
+  Nikola_Tesla: 511 questions
+  2008_Summer_Olympics_torch_relay: 500 questions
+  Muammar_Gaddafi: 489 questions
+  Martin_Luther: 479 questions
+  Hellenistic_period: 469 questions
+  Napoleon: 458 questions
+
+=== SECTION 4: TEXT LENGTH ANALYSIS ===
+  CONTEXT: words mean=120.2, median=110.0, min=20, max=653, std=50.2
+  QUESTION: words mean=10.1, median=10.0, min=1, max=40, std=3.6
+  ANSWER: words mean=3.1, median=2.0, min=1, max=43, std=3.4
+
+=== SECTION 5: WORD FREQUENCY ANALYSIS ===
+Question vocabulary size (excl stopwords): 37164
+Context vocabulary size (excl stopwords): 74920
+Answer vocabulary size (excl stopwords): 36608
+Stopword ratio in questions: 47.1%
+
+Top 20 question words: ['many', 'year', 'name', 'first', 'type', 'used', 'new', 'city', 'people', 'one', 'two', 'called', 'much', 'use', 'time', 'war', 'located', 'country', 'known', 'group']
+Top 20 context words: ['also', 'one', 'first', 'new', 'city', 'many', 'two', 'time', 'world', 'states', 'state', 'used', 'may', 'century', 'united', 'would', 'war', 'known', 'including', 'years']
+Top 20 answer words: ['million', 'two', 'century', 'new', 'one', 'three', 'united', 'years', 'war', 'world', 'states', 'state', 'four', 'john', 'city', 'may', 'national', 'system', 'five', 'government']
+
+=== SECTION 6: N-GRAM ANALYSIS ===
+Top 15 Bigrams (Questions):
+  "many people": 495
+  "united states": 448
+  "new york": 408
+  "super bowl": 355
+  "american idol": 325
+  "take place": 271
+  "notre dame": 228
+  "another name": 185
+  "world war": 177
+  "mexico city": 164
+  "many years": 160
+  "premier league": 149
+  "san diego": 147
+  "york city": 141
+  "prime minister": 138
+
+Top 15 Trigrams (Questions):
+  "new york city": 141
+  "season american idol": 45
+  "east india company": 43
+  "arena football league": 33
+  "term used describe": 31
+  "many people died": 30
+  "many people lived": 30
+  "many square miles": 29
+  "roman catholic church": 25
+  "many people live": 22
+  "seven years war": 21
+  "many people killed": 20
+  "late middle ages": 20
+  "fifa world cup": 20
+  "endangered species act": 20
+
+=== SECTION 7: CATEGORY-SPECIFIC ANALYSIS ===
+  Top words for "What": ['name', 'type', 'used', 'year', 'called']
+  Top words for "How": ['many', 'much', 'long', 'people', 'city']
+  Top words for "Who": ['first', 'wrote', 'president', 'new', 'led']
+  Top words for "When": ['first', 'begin', 'become', 'start', 'die']
+  Top words for "Where": ['located', 'first', 'found', 'held', 'place']
+  Top words for "Why": ['used', 'would', 'use', 'people', 'many']
+  What: avg Q=9.9 words, avg A=3.5 words
+  How: avg Q=9.9 words, avg A=3.0 words
+  Who: avg Q=9.0 words, avg A=2.8 words
+  When: avg Q=8.6 words, avg A=2.3 words
+  Where: avg Q=8.3 words, avg A=3.1 words
+  Why: avg Q=9.6 words, avg A=7.9 words
+  What avg answer position: 0.429 (0=start, 1=end)
+  How avg answer position: 0.446 (0=start, 1=end)
+  Who avg answer position: 0.402 (0=start, 1=end)
+  When avg answer position: 0.394 (0=start, 1=end)
+  Where avg answer position: 0.426 (0=start, 1=end)
+  Why avg answer position: 0.472 (0=start, 1=end)
+
+=== SECTION 8: KEY INSIGHTS ===
+
+  DATASET_CHARACTERISTICS:
+    • Dataset contains 98169 QA pairs from 490 Wikipedia articles
+    • No missing values detected
+    • Context: avg 120.2 words (range 20–653)
+    • Question: avg 10.1 words
+    • Answer: avg 3.1 words — very short, ideal for extractive QA
+    • "What" questions dominate at 43.1% — imbalance ratio 31.3x
+    • Diverse topics spanning history, sports, science, geography, entertainment
+    • Question vocabulary size: 37,164 unique words (excl. stopwords)
+    • Stopword ratio in questions: 47.1%
+    • Answers tend to appear early in context (position skewed toward 0.0)
+
+  PREPROCESSING_SUGGESTIONS:
+    • Tokenization: use WordPiece or BPE tokenizer for transformer models
+    • Lowercasing: recommended for consistency
+    • Stopword removal: helpful for TF-IDF, NOT for transformer models (BERT, etc.)
+    • Punctuation removal: optional, depends on model
+    • Stemming/Lemmatization: useful for traditional ML, not for transformers
+    • Consider answer span position as feature for model training
+    • Handle question type imbalance — What-questions may dominate model behavior
+    • English-only dataset — not suitable for multilingual QA
+    • SQuAD 1.1 has no unanswerable questions — consider SQuAD 2.0 for robustness
+
+======================================================================
+Stats exported to: eda_text_stats.txt
+JSON data exported to: eda_text_data.json
+======================================================================

@@ -1,0 +1,202 @@
+======================================================================
+EDA MULTIMODAL STATS — Flickr8k
+======================================================================
+
+=== SECTION 2: DATASET OVERVIEW ===
+Total image-caption pairs: 40455
+Unique images (in captions): 8091
+Image files on disk: 8091
+Captions per image: min=5, max=5, mean=5.0
+Number of modalities: 2 (Image + Text)
+Image format: JPEG (variable resolution)
+Text format: English captions (UTF-8)
+Avg image file size: 135 KB
+Estimated total storage: 1071 MB
+
+Missing values in DataFrame: 0
+
+=== SECTION 3: DATA QUALITY & MISSING MODALITIES ===
+Complete pairs (both image + text): 8091 (100.0%)
+Text-only (caption exists, image missing): 0 (0.0%)
+Image-only (image exists, no caption): 0
+
+Corrupted image check (sampled 2000):
+  Corrupted found: 0 (0.00%)
+  Estimated total corrupted: ~0
+
+=== SECTION 4: VISUAL MODALITY ANALYSIS ===
+Image dimension stats (2000 sampled):
+  Width:  mean=457, min=182, max=500, std=70
+  Height: mean=397, min=166, max=500, std=76
+  Aspect ratio: mean=1.220, min=0.364, max=3.012
+  File size: mean=133 KB, min=29, max=306
+
+Color channel means:
+  Red:   117.0
+  Green: 113.8
+  Blue:  103.2
+  Brightness: 111.4
+
+=== SECTION 5: TEXTUAL MODALITY ANALYSIS ===
+Caption word count: mean=11.8, median=11.0, min=1, max=38
+Caption char count: mean=55.1
+Vocabulary size (excl stopwords): 8274
+Stopword ratio: 42.4%
+Top 10 words: ['dog', 'man', 'two', 'white', 'black', 'boy', 'woman', 'girl', 'wearing', 'people']
+Top 5 bigrams: ['white dog', 'brown dog', 'black dog', 'dog running', 'two dogs']
+Top 5 trigrams: ['black white dog', 'brown white dog', 'white dog running', 'brown dog running', 'black dog running']
+
+=== SECTION 6: CROSS-MODAL ANALYSIS ===
+Caption similarity (Jaccard):
+  Mean: 0.278
+  Std:  0.139
+  ~28% average word overlap between captions for same image
+Correlation (caption length vs similarity): r=-0.075, p=0.0000
+Correlation (caption length vs image file size): r=-0.016, p=0.4704
+
+=== SECTION 7: TARGET/LABEL DISTRIBUTION ===
+First-word distribution (top 10):
+  "a": 24704 (61.1%)
+  "two": 4727 (11.7%)
+  "the": 3121 (7.7%)
+  "three": 1168 (2.9%)
+  "an": 533 (1.3%)
+  "people": 460 (1.1%)
+  "man": 455 (1.1%)
+  "four": 389 (1.0%)
+  "there": 272 (0.7%)
+  "one": 240 (0.6%)
+
+Subject/Object frequency:
+  dog: 8136
+  man: 7265
+  boy: 3581
+  woman: 3402
+  girl: 3328
+  people: 2883
+  water: 2783
+  ball: 1779
+  grass: 1622
+  child: 1545
+
+Subject imbalance ratio: 35.1x (dog vs horse)
+
+=== SECTION 8: SAMPLE MULTIMODAL PAIRS ===
+  3139895886_5a6d495b13.jpg: A black-and-white dog bounds off the ground , all feet in the air , of a yellow ...
+  3133825703_359a0c414d.jpg: A child staring at Santa ....
+  244910177_7c4ec3f65b.jpg: Three woman walk down a city street and one has a pink purse ....
+  2127207912_9298824e66.jpg: The two people are standing on a rock , holding themselves up against another ro...
+  1810651611_35aae644fb.jpg: A closeup of a little girl on a swing ....
+  2271468944_3264d29208.jpg: A boy at the beach dumps a bucket of water on another boy 's head ....
+
+=== SECTION 9A: POS TAG DISTRIBUTION ===
+POS Tag Distribution (sampled 10K captions):
+  NOUN: 34556 (32.04%)
+  DET: 21362 (19.81%)
+  ADP: 16501 (15.3%)
+  VERB: 12151 (11.27%)
+  ADJ: 10166 (9.43%)
+  AUX: 3448 (3.2%)
+  CCONJ: 2321 (2.15%)
+  NUM: 2224 (2.06%)
+  PRON: 1983 (1.84%)
+  ADV: 1122 (1.04%)
+  PROPN: 934 (0.87%)
+  SCONJ: 555 (0.51%)
+  PART: 471 (0.44%)
+  INTJ: 37 (0.03%)
+  X: 5 (0.0%)
+
+=== SECTION 9B: DUPLICATE CAPTIONS ===
+Total unique captions: 40170
+Exact duplicate caption rows: 285 (0.70%)
+Captions appearing for multiple images: 199
+Total rows with cross-image duplicates: 473 (1.17%)
+  "a dog runs through the grass ...." → 7 different images, 7 total
+  "two dogs playing in the snow ...." → 7 different images, 7 total
+  "a person on a bmx bike ...." → 6 different images, 6 total
+  "two dogs play together ...." → 6 different images, 6 total
+  "two dogs play in the grass ...." → 6 different images, 6 total
+  "a dog runs through the snow ...." → 5 different images, 5 total
+  "a dog plays in the snow ...." → 5 different images, 5 total
+  "a dog runs across the grass ...." → 5 different images, 5 total
+  "two dogs run through a field ...." → 5 different images, 5 total
+  "a dog swimming with a stick in its mouth ...." → 5 different images, 6 total
+
+=== SECTION 9C: OUTLIER CAPTIONS ===
+IQR Method: Q1=9.0, Q3=14.0, IQR=5.0
+Valid range: [1.5, 21.5] words
+Outliers (too short): 2
+Outliers (too long): 704
+Total outliers: 706 (1.745%)
+  [1 words] A...
+  [1 words] a...
+  [23 words] A couple and an infant , being held by the male , sitting next to a pond with a ...
+  [24 words] A man is holding the hand of a woman up to his mouth in front of some buildings ...
+  [23 words] A man lies on a mat in a parking lot between a brown SUV and a yellow pickup wit...
+  [23 words] A boy in blue swimming trunks slides down a yellow slide into a wading pool with...
+  [25 words] A man in water throwing a little boy up in the air and waiting for him to come d...
+  [28 words] The girl in the salmon colored bikini is standing next to two young people ; one...
+  [22 words] A woman dressed in a blue jacket and blue jeans rides a brown horse near a froze...
+  [23 words] A woman wearing a blue dress is drawing a picture of a boy and a girl on the sid...
+  [22 words] A person dressed in a tan jacket jumps a quad over a harvested cornfield in fron...
+  [31 words] There are three young people , one dark haired holding a bottled drink , one wit...
+  [23 words] A black lav runs into the water on the beach , with swimmers in the distance and...
+  [28 words] A man is standing with his arms folded looking at something while the person beh...
+  [22 words] a man wearing a yellow shirt standing in the middle of two beds that a boy is ju...
+  [23 words] A girl dressed in a red top , a red cap , and light colored shorts , sits on a r...
+  [22 words] A little girl with a red hood and shirt is sitting with legs sprawled on a rock ...
+  [23 words] A man in a red shirt and glasses is bending down towards a small dog on a blanke...
+  [30 words] A man in a black shirt and jeans walks beside a woman in black pants and a flowe...
+  [24 words] A woman with a floral shirt and purse and a man with a black shirt are walking w...
+
+=== SECTION 9D: GENDER BIAS ANALYSIS ===
+Male-gendered words total: 16035
+Female-gendered words total: 9923
+Gender bias ratio (M/F): 1.62x
+
+Top male words: [('man', 7274), ('boy', 3581), ('his', 2357), ('men', 1121), ('boys', 666)]
+Top female words: [('woman', 3402), ('girl', 3328), ('her', 1178), ('girls', 844), ('women', 652)]
+
+=== SECTION 10: KEY INSIGHTS (UPDATED) ===
+
+  DATASET_CHARACTERISTICS:
+    • 8091 unique images × 5 captions = 40455 multimodal pairs
+    • 2 modalities: Image (JPEG) + Text (English caption)
+    • 8091 complete pairs (100.0%)
+    • 0 corrupted images detected (out of 2000 sampled)
+    • Image sizes non-uniform: mainly 500×333 or 333×500 (landscape/portrait)
+    • Captions avg 11.8 words, vocab size 8274
+    • Stopword ratio: 42.4%
+    • 61.1% of captions start with "A" — dominant descriptive pattern
+    • Most described subjects: dog, man, woman, boy, girl
+    • Inter-annotator Jaccard similarity: 0.278 (moderate agreement)
+    • Warm-toned images: R=117.0, G=113.8, B=103.2
+    • POS distribution: NOUNs dominate captions (typical for descriptive text)
+    • Gender bias ratio: 1.62x (more male-gendered words than female)
+    • Duplicate captions across images: 199 unique captions shared
+    • Outlier captions (IQR): 706 (1.745%)
+
+  UNIMODAL_PREPROCESSING:
+    • IMAGE: Resize all images to uniform resolution (e.g., 224×224 for CNN, 384×384 for ViT)
+    • IMAGE: Normalize pixel values to [0,1] or standardize with ImageNet mean/std
+    • IMAGE: Apply data augmentation (random crop, flip, color jitter) for training
+    • TEXT: Lowercase + remove punctuation
+    • TEXT: Tokenize using WordPiece/BPE for transformer models
+    • TEXT: Pad/truncate captions to fixed max length
+    • TEXT: Build vocabulary with frequency threshold (e.g., min_freq=5)
+    • TEXT: Consider removing outlier captions (too short/too long)
+
+  CROSSMODAL_PREPROCESSING:
+    • Drop samples with missing modality (text-only or image-only)
+    • Drop corrupted images or replace with placeholder
+    • Align image-caption pairs: ensure each image maps to exactly 5 captions
+    • Handle duplicate captions: decide whether to keep or deduplicate
+    • Consider gender bias when evaluating model outputs
+    • For evaluation: use BLEU/CIDEr/METEOR scores with all 5 reference captions
+    • Dataset is small (8K images) — consider pre-training on larger datasets (COCO 330K) then fine-tuning
+
+======================================================================
+Stats exported to: eda_multimodal_stats.txt
+JSON data exported to: eda_multimodal_data.json
+======================================================================

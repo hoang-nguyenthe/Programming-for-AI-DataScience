@@ -1,0 +1,37 @@
+======================================================================
+EDA TABULAR STATS — Advertisement Click on Ad
+======================================================================
+
+=== SECTION 2: DATASET OVERVIEW ===
+Total Samples: 1000
+Total Features: 9 (excl. target)
+Numerical Features (5): ['Daily Time Spent on Site', 'Age', 'Area Income', 'Daily Internet Usage', 'Male']
+Categorical Features (4): ['Ad Topic Line', 'City', 'Country', 'Timestamp']
+
+Target Variable: Clicked on Ad
+  Class 0: 500 samples (50.0%)
+  Class 1: 500 samples (50.0%)
+
+Feature Descriptions:
+  Daily Time Spent on Site [Numerical] dtype=float64, unique=900
+  Age [Numerical] dtype=int64, unique=43
+  Area Income [Numerical] dtype=float64, unique=1000
+  Daily Internet Usage [Numerical] dtype=float64, unique=966
+  Ad Topic Line [Categorical] dtype=str, unique=1000
+  City [Categorical] dtype=str, unique=969
+  Male [Numerical] dtype=int64, unique=2
+  Country [Categorical] dtype=str, unique=237
+  Timestamp [Categorical] dtype=str, unique=1000
+  Clicked on Ad [Target] dtype=int64, unique=2
+
+=== SECTION 3: MISSING VALUES ANALYSIS ===
+Total Missing Cells: 0
+Columns with Missing: 0
+  ✅ No missing values found in any column!
+
+=== SECTION 4: NUMERICAL FEATURES DISTRIBUTION ===
+  Daily Time Spent on Site: mean=65.0, median=68.22, std=15.85, min=32.6, max=91.43, skew=-0.372, kurt=-1.096
+  Age: mean=36.01, median=35.0, std=8.79, min=19.0, max=61.0, skew=0.479, kurt=-0.401
+  Area Income: mean=55000.0, median=57012.3, std=13414.63, min=13996.5, max=79484.8, skew=-0.65, kurt=-0.1
+  Daily Internet Usage: mean=180.0, median=183.13, std=43.9, min=104.78, max=269.96, skew=-0.034, kurt=-1.273
+  Male: mean=0.48, median=0.0, std=0.5, min=0.0, max=1.0, skew=0.076, kurt=-1.998

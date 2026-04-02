@@ -1,0 +1,1082 @@
+{
+  "dataset_overview": {
+    "n_samples": 1000,
+    "n_features": 9,
+    "n_numerical": 5,
+    "n_categorical": 4,
+    "numerical_columns": [
+      "Daily Time Spent on Site",
+      "Age",
+      "Area Income",
+      "Daily Internet Usage",
+      "Male"
+    ],
+    "categorical_columns": [
+      "Ad Topic Line",
+      "City",
+      "Country",
+      "Timestamp"
+    ],
+    "target_column": "Clicked on Ad",
+    "target_distribution": {
+      "0": {
+        "count": 500,
+        "pct": 50.0
+      },
+      "1": {
+        "count": 500,
+        "pct": 50.0
+      }
+    },
+    "feature_info": [
+      {
+        "name": "Daily Time Spent on Site",
+        "type": "Numerical",
+        "dtype": "float64",
+        "n_unique": 900,
+        "sample_values": [
+          68.95,
+          80.23,
+          69.47
+        ]
+      },
+      {
+        "name": "Age",
+        "type": "Numerical",
+        "dtype": "int64",
+        "n_unique": 43,
+        "sample_values": [
+          35,
+          31,
+          26
+        ]
+      },
+      {
+        "name": "Area Income",
+        "type": "Numerical",
+        "dtype": "float64",
+        "n_unique": 1000,
+        "sample_values": [
+          61833.9,
+          68441.85,
+          59785.94
+        ]
+      },
+      {
+        "name": "Daily Internet Usage",
+        "type": "Numerical",
+        "dtype": "float64",
+        "n_unique": 966,
+        "sample_values": [
+          256.09,
+          193.77,
+          236.5
+        ]
+      },
+      {
+        "name": "Ad Topic Line",
+        "type": "Categorical",
+        "dtype": "str",
+        "n_unique": 1000,
+        "sample_values": [
+          "Cloned 5thgeneration orchestration",
+          "Monitored national standardization",
+          "Organic bottom-line service-desk"
+        ]
+      },
+      {
+        "name": "City",
+        "type": "Categorical",
+        "dtype": "str",
+        "n_unique": 969,
+        "sample_values": [
+          "Wrightburgh",
+          "West Jodi",
+          "Davidton"
+        ]
+      },
+      {
+        "name": "Male",
+        "type": "Numerical",
+        "dtype": "int64",
+        "n_unique": 2,
+        "sample_values": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "name": "Country",
+        "type": "Categorical",
+        "dtype": "str",
+        "n_unique": 237,
+        "sample_values": [
+          "Tunisia",
+          "Nauru",
+          "San Marino"
+        ]
+      },
+      {
+        "name": "Timestamp",
+        "type": "Categorical",
+        "dtype": "str",
+        "n_unique": 1000,
+        "sample_values": [
+          "2016-03-27 00:53:11",
+          "2016-04-04 01:39:02",
+          "2016-03-13 20:35:42"
+        ]
+      },
+      {
+        "name": "Clicked on Ad",
+        "type": "Target",
+        "dtype": "int64",
+        "n_unique": 2,
+        "sample_values": [
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  "missing_values": {
+    "total_missing_cells": 0,
+    "columns_with_missing": 0,
+    "per_column": [
+      {
+        "feature": "Daily Time Spent on Site",
+        "missing_count": 0,
+        "missing_pct": 0.0,
+        "severity": "\u2713 None"
+      },
+      {
+        "feature": "Age",
+        "missing_count": 0,
+        "missing_pct": 0.0,
+        "severity": "\u2713 None"
+      },
+      {
+        "feature": "Area Income",
+        "missing_count": 0,
+        "missing_pct": 0.0,
+        "severity": "\u2713 None"
+      },
+      {
+        "feature": "Daily Internet Usage",
+        "missing_count": 0,
+        "missing_pct": 0.0,
+        "severity": "\u2713 None"
+      },
+      {
+        "feature": "Ad Topic Line",
+        "missing_count": 0,
+        "missing_pct": 0.0,
+        "severity": "\u2713 None"
+      },
+      {
+        "feature": "City",
+        "missing_count": 0,
+        "missing_pct": 0.0,
+        "severity": "\u2713 None"
+      },
+      {
+        "feature": "Male",
+        "missing_count": 0,
+        "missing_pct": 0.0,
+        "severity": "\u2713 None"
+      },
+      {
+        "feature": "Country",
+        "missing_count": 0,
+        "missing_pct": 0.0,
+        "severity": "\u2713 None"
+      },
+      {
+        "feature": "Timestamp",
+        "missing_count": 0,
+        "missing_pct": 0.0,
+        "severity": "\u2713 None"
+      },
+      {
+        "feature": "Clicked on Ad",
+        "missing_count": 0,
+        "missing_pct": 0.0,
+        "severity": "\u2713 None"
+      }
+    ]
+  },
+  "numerical_features": [
+    {
+      "feature": "Daily Time Spent on Site",
+      "mean": 65.0,
+      "median": 68.22,
+      "std": 15.85,
+      "min": 32.6,
+      "max": 91.43,
+      "q1": 51.36,
+      "q3": 78.55,
+      "skewness": -0.372,
+      "kurtosis": -1.096,
+      "histogram_values": [
+        10,
+        27,
+        24,
+        33,
+        27,
+        35,
+        32,
+        25,
+        24,
+        24,
+        20,
+        28,
+        34,
+        24,
+        25,
+        29,
+        29,
+        44,
+        38,
+        39,
+        46,
+        48,
+        64,
+        58,
+        65,
+        42,
+        44,
+        33,
+        19,
+        10
+      ],
+      "histogram_edges": [
+        32.6,
+        34.561,
+        36.522,
+        38.483000000000004,
+        40.444,
+        42.405,
+        44.366,
+        46.327,
+        48.288000000000004,
+        50.249,
+        52.21,
+        54.17100000000001,
+        56.132000000000005,
+        58.093,
+        60.054,
+        62.015,
+        63.976,
+        65.93700000000001,
+        67.898,
+        69.85900000000001,
+        71.82,
+        73.781,
+        75.742,
+        77.703,
+        79.664,
+        81.625,
+        83.58600000000001,
+        85.547,
+        87.50800000000001,
+        89.469,
+        91.43
+      ]
+    },
+    {
+      "feature": "Age",
+      "mean": 36.01,
+      "median": 35.0,
+      "std": 8.79,
+      "min": 19.0,
+      "max": 61.0,
+      "q1": 29.0,
+      "q3": 42.0,
+      "skewness": 0.479,
+      "kurtosis": -0.401,
+      "histogram_values": [
+        12,
+        6,
+        32,
+        21,
+        27,
+        70,
+        48,
+        87,
+        60,
+        38,
+        82,
+        39,
+        86,
+        37,
+        30,
+        68,
+        26,
+        44,
+        30,
+        18,
+        29,
+        18,
+        32,
+        15,
+        10,
+        16,
+        2,
+        10,
+        2,
+        5
+      ],
+      "histogram_edges": [
+        19.0,
+        20.4,
+        21.8,
+        23.2,
+        24.6,
+        26.0,
+        27.4,
+        28.799999999999997,
+        30.2,
+        31.6,
+        33.0,
+        34.4,
+        35.8,
+        37.2,
+        38.599999999999994,
+        40.0,
+        41.4,
+        42.8,
+        44.2,
+        45.599999999999994,
+        47.0,
+        48.4,
+        49.8,
+        51.199999999999996,
+        52.599999999999994,
+        54.0,
+        55.4,
+        56.8,
+        58.199999999999996,
+        59.599999999999994,
+        61.0
+      ]
+    },
+    {
+      "feature": "Area Income",
+      "mean": 55000.0,
+      "median": 57012.3,
+      "std": 13414.63,
+      "min": 13996.5,
+      "max": 79484.8,
+      "q1": 47031.8,
+      "q3": 65470.63,
+      "skewness": -0.65,
+      "kurtosis": -0.1,
+      "histogram_values": [
+        5,
+        1,
+        4,
+        7,
+        10,
+        13,
+        15,
+        15,
+        19,
+        18,
+        16,
+        27,
+        28,
+        37,
+        30,
+        43,
+        52,
+        67,
+        48,
+        57,
+        65,
+        71,
+        73,
+        68,
+        68,
+        49,
+        32,
+        32,
+        21,
+        9
+      ],
+      "histogram_edges": [
+        13996.5,
+        16179.443333333333,
+        18362.386666666665,
+        20545.33,
+        22728.273333333334,
+        24911.216666666667,
+        27094.160000000003,
+        29277.103333333336,
+        31460.04666666667,
+        33642.990000000005,
+        35825.933333333334,
+        38008.87666666667,
+        40191.82000000001,
+        42374.763333333336,
+        44557.70666666667,
+        46740.65000000001,
+        48923.59333333334,
+        51106.536666666674,
+        53289.48,
+        55472.42333333334,
+        57655.36666666667,
+        59838.310000000005,
+        62021.25333333334,
+        64204.19666666667,
+        66387.14000000001,
+        68570.08333333334,
+        70753.02666666667,
+        72935.97,
+        75118.91333333334,
+        77301.85666666667,
+        79484.8
+      ]
+    },
+    {
+      "feature": "Daily Internet Usage",
+      "mean": 180.0,
+      "median": 183.13,
+      "std": 43.9,
+      "min": 104.78,
+      "max": 269.96,
+      "q1": 138.83,
+      "q3": 218.79,
+      "skewness": -0.034,
+      "kurtosis": -1.273,
+      "histogram_values": [
+        35,
+        29,
+        47,
+        45,
+        43,
+        43,
+        37,
+        26,
+        41,
+        30,
+        32,
+        36,
+        26,
+        25,
+        26,
+        30,
+        43,
+        45,
+        36,
+        49,
+        40,
+        50,
+        45,
+        48,
+        26,
+        22,
+        23,
+        17,
+        3,
+        2
+      ],
+      "histogram_edges": [
+        104.78,
+        110.286,
+        115.792,
+        121.298,
+        126.804,
+        132.31,
+        137.816,
+        143.322,
+        148.828,
+        154.334,
+        159.84,
+        165.346,
+        170.85199999999998,
+        176.358,
+        181.86399999999998,
+        187.37,
+        192.87599999999998,
+        198.382,
+        203.88799999999998,
+        209.394,
+        214.89999999999998,
+        220.406,
+        225.91199999999998,
+        231.418,
+        236.92399999999998,
+        242.42999999999998,
+        247.93599999999998,
+        253.44199999999998,
+        258.948,
+        264.45399999999995,
+        269.96
+      ]
+    },
+    {
+      "feature": "Male",
+      "mean": 0.48,
+      "median": 0.0,
+      "std": 0.5,
+      "min": 0.0,
+      "max": 1.0,
+      "q1": 0.0,
+      "q3": 1.0,
+      "skewness": 0.076,
+      "kurtosis": -1.998,
+      "histogram_values": [
+        519,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        481
+      ],
+      "histogram_edges": [
+        0.0,
+        0.03333333333333333,
+        0.06666666666666667,
+        0.1,
+        0.13333333333333333,
+        0.16666666666666666,
+        0.2,
+        0.23333333333333334,
+        0.26666666666666666,
+        0.3,
+        0.3333333333333333,
+        0.36666666666666664,
+        0.4,
+        0.43333333333333335,
+        0.4666666666666667,
+        0.5,
+        0.5333333333333333,
+        0.5666666666666667,
+        0.6,
+        0.6333333333333333,
+        0.6666666666666666,
+        0.7,
+        0.7333333333333333,
+        0.7666666666666666,
+        0.8,
+        0.8333333333333334,
+        0.8666666666666667,
+        0.9,
+        0.9333333333333333,
+        0.9666666666666667,
+        1.0
+      ]
+    }
+  ],
+  "categorical_features": [
+    {
+      "feature": "Ad Topic Line",
+      "n_unique": 1000,
+      "dtype": "str",
+      "top_categories": [
+        "Cloned 5thgeneration orchestration",
+        "Monitored national standardization",
+        "Organic bottom-line service-desk",
+        "Triple-buffered reciprocal time-frame",
+        "Robust logistical utilization",
+        "Sharable client-driven software",
+        "Enhanced dedicated support",
+        "Reactive local challenge",
+        "Configurable coherent function",
+        "Mandatory homogeneous architecture"
+      ],
+      "top_counts": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "value_counts": {
+        "Cloned 5thgeneration orchestration": 1,
+        "Monitored national standardization": 1,
+        "Organic bottom-line service-desk": 1,
+        "Triple-buffered reciprocal time-frame": 1,
+        "Robust logistical utilization": 1,
+        "Sharable client-driven software": 1,
+        "Enhanced dedicated support": 1,
+        "Reactive local challenge": 1,
+        "Configurable coherent function": 1,
+        "Mandatory homogeneous architecture": 1,
+        "Centralized neutral neural-net": 1,
+        "Team-oriented grid-enabled Local Area Network": 1,
+        "Centralized content-based focus group": 1,
+        "Synergistic fresh-thinking array": 1,
+        "Grass-roots coherent extranet": 1,
+        "Persistent demand-driven interface": 1,
+        "Customizable multi-tasking website": 1,
+        "Intuitive dynamic attitude": 1,
+        "Grass-roots solution-oriented conglomeration": 1,
+        "Advanced 24/7 productivity": 1
+      },
+      "sample_values": [
+        "Customizable holistic archive",
+        "Self-enabling zero administration neural-net",
+        "Quality-focused maximized extranet"
+      ]
+    },
+    {
+      "feature": "City",
+      "n_unique": 969,
+      "dtype": "str",
+      "top_categories": [
+        "Lisamouth",
+        "Williamsport",
+        "Wrightburgh",
+        "Millertown",
+        "Pamelamouth",
+        "Johnstad",
+        "Robertfurt",
+        "New Sheila",
+        "Benjaminchester",
+        "Michelleside"
+      ],
+      "top_counts": [
+        3,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "value_counts": {
+        "Lisamouth": 3,
+        "Williamsport": 3,
+        "Wrightburgh": 2,
+        "Millertown": 2,
+        "Pamelamouth": 2,
+        "Johnstad": 2,
+        "Robertfurt": 2,
+        "New Sheila": 2,
+        "Benjaminchester": 2,
+        "Michelleside": 2,
+        "East John": 2,
+        "Lake Jose": 2,
+        "Joneston": 2,
+        "Port Julie": 2,
+        "Millerbury": 2,
+        "Port Jason": 2,
+        "East Timothy": 2,
+        "Lake David": 2,
+        "West Amanda": 2,
+        "Lake Patrick": 2
+      },
+      "sample_values": [
+        "East Donna",
+        "Ericksonmouth",
+        "Frankport"
+      ]
+    },
+    {
+      "feature": "Country",
+      "n_unique": 237,
+      "dtype": "str",
+      "top_categories": [
+        "Czech Republic",
+        "France",
+        "Australia",
+        "Afghanistan",
+        "Greece",
+        "Peru",
+        "Senegal",
+        "Liberia",
+        "Micronesia",
+        "Turkey"
+      ],
+      "top_counts": [
+        9,
+        9,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "value_counts": {
+        "Czech Republic": 9,
+        "France": 9,
+        "Australia": 8,
+        "Afghanistan": 8,
+        "Greece": 8,
+        "Peru": 8,
+        "Senegal": 8,
+        "Liberia": 8,
+        "Micronesia": 8,
+        "Turkey": 8,
+        "South Africa": 8,
+        "Cyprus": 8,
+        "Burundi": 7,
+        "Bosnia and Herzegovina": 7,
+        "Luxembourg": 7,
+        "Venezuela": 7,
+        "Albania": 7,
+        "Western Sahara": 7,
+        "Eritrea": 7,
+        "Cambodia": 7
+      },
+      "sample_values": [
+        "Ethiopia",
+        "Sweden",
+        "Korea"
+      ]
+    },
+    {
+      "feature": "Timestamp",
+      "n_unique": 1000,
+      "dtype": "str",
+      "top_categories": [
+        "2016-03-27 00:53:11",
+        "2016-04-04 01:39:02",
+        "2016-03-13 20:35:42",
+        "2016-01-10 02:31:19",
+        "2016-06-03 03:36:18",
+        "2016-05-19 14:30:17",
+        "2016-01-28 20:59:32",
+        "2016-03-07 01:40:15",
+        "2016-04-18 09:33:42",
+        "2016-07-11 01:42:51"
+      ],
+      "top_counts": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "value_counts": {
+        "2016-03-27 00:53:11": 1,
+        "2016-04-04 01:39:02": 1,
+        "2016-03-13 20:35:42": 1,
+        "2016-01-10 02:31:19": 1,
+        "2016-06-03 03:36:18": 1,
+        "2016-05-19 14:30:17": 1,
+        "2016-01-28 20:59:32": 1,
+        "2016-03-07 01:40:15": 1,
+        "2016-04-18 09:33:42": 1,
+        "2016-07-11 01:42:51": 1,
+        "2016-03-16 20:19:01": 1,
+        "2016-05-08 08:10:10": 1,
+        "2016-06-03 01:14:41": 1,
+        "2016-04-20 21:49:22": 1,
+        "2016-03-24 09:31:49": 1,
+        "2016-03-09 03:41:30": 1,
+        "2016-01-30 19:20:41": 1,
+        "2016-05-02 07:00:58": 1,
+        "2016-02-13 07:53:55": 1,
+        "2016-02-27 04:43:07": 1
+      },
+      "sample_values": [
+        "2016-03-02 04:02:45",
+        "2016-01-05 11:53:17",
+        "2016-05-25 19:45:16"
+      ]
+    }
+  ],
+  "correlations": {
+    "features": [
+      "Daily Time Spent on Site",
+      "Age",
+      "Area Income",
+      "Daily Internet Usage",
+      "Male"
+    ],
+    "matrix": [
+      [
+        1.0,
+        -0.3315133427865839,
+        0.31095441252288275,
+        0.5186584753371867,
+        -0.018950854598913703
+      ],
+      [
+        -0.3315133427865839,
+        1.0,
+        -0.18260495503262136,
+        -0.367208560147359,
+        -0.021044063680953545
+      ],
+      [
+        0.31095441252288275,
+        -0.18260495503262136,
+        1.0,
+        0.3374955328652761,
+        0.0013223588849242528
+      ],
+      [
+        0.5186584753371867,
+        -0.367208560147359,
+        0.3374955328652761,
+        1.0,
+        0.02801232630484873
+      ],
+      [
+        -0.018950854598913703,
+        -0.021044063680953545,
+        0.0013223588849242528,
+        0.02801232630484873,
+        1.0
+      ]
+    ],
+    "high_pairs": [
+      {
+        "feature1": "Daily Time Spent on Site",
+        "feature2": "Age",
+        "correlation": -0.3315133427865839
+      },
+      {
+        "feature1": "Daily Time Spent on Site",
+        "feature2": "Area Income",
+        "correlation": 0.31095441252288275
+      },
+      {
+        "feature1": "Daily Time Spent on Site",
+        "feature2": "Daily Internet Usage",
+        "correlation": 0.5186584753371867
+      },
+      {
+        "feature1": "Age",
+        "feature2": "Daily Internet Usage",
+        "correlation": -0.367208560147359
+      },
+      {
+        "feature1": "Area Income",
+        "feature2": "Daily Internet Usage",
+        "correlation": 0.3374955328652761
+      }
+    ]
+  },
+  "targetVs": {
+    "education": {
+      "labels": [
+        "Afghanistan",
+        "Australia",
+        "Czech Republic",
+        "France",
+        "Greece",
+        "Liberia",
+        "Micronesia",
+        "Peru",
+        "Senegal",
+        "Turkey"
+      ],
+      "low": [
+        3,
+        1,
+        5,
+        4,
+        5,
+        2,
+        4,
+        3,
+        3,
+        1
+      ],
+      "high": [
+        5,
+        7,
+        4,
+        5,
+        3,
+        6,
+        4,
+        5,
+        5,
+        7
+      ]
+    }
+  },
+  "sample_rows": [
+    {
+      "Daily Time Spent on Site": "61.82",
+      "Age": "59",
+      "Area Income": "57877.15",
+      "Daily Internet Usage": "151.93",
+      "Ad Topic Line": "Open-architected needs-based customer loyalty",
+      "City": "Olsonside",
+      "Male": "1",
+      "Country": "Barbados",
+      "Timestamp": "2016-02-06 17:48:28",
+      "Clicked on Ad": "1"
+    },
+    {
+      "Daily Time Spent on Site": "55.6",
+      "Age": "44",
+      "Area Income": "65953.76",
+      "Daily Internet Usage": "124.38",
+      "Ad Topic Line": "Fully-configurable neutral open system",
+      "City": "New Debbiestad",
+      "Male": "1",
+      "Country": "Korea",
+      "Timestamp": "2016-06-14 11:59:58",
+      "Clicked on Ad": "1"
+    },
+    {
+      "Daily Time Spent on Site": "32.6",
+      "Age": "45",
+      "Area Income": "48206.04",
+      "Daily Internet Usage": "185.47",
+      "Ad Topic Line": "Multi-tiered interactive neural-net",
+      "City": "New Henry",
+      "Male": "0",
+      "Country": "Mayotte",
+      "Timestamp": "2016-05-02 18:37:01",
+      "Clicked on Ad": "1"
+    },
+    {
+      "Daily Time Spent on Site": "52.62",
+      "Age": "50",
+      "Area Income": "73863.25",
+      "Daily Internet Usage": "176.52",
+      "Ad Topic Line": "Enterprise-wide foreground emulation",
+      "City": "Port Juan",
+      "Male": "0",
+      "Country": "Seychelles",
+      "Timestamp": "2016-02-01 20:30:35",
+      "Clicked on Ad": "1"
+    },
+    {
+      "Daily Time Spent on Site": "35.65",
+      "Age": "40",
+      "Area Income": "31265.75",
+      "Daily Internet Usage": "172.58",
+      "Ad Topic Line": "Seamless intangible secured line",
+      "City": "North Johntown",
+      "Male": "1",
+      "Country": "Georgia",
+      "Timestamp": "2016-05-10 07:22:37",
+      "Clicked on Ad": "1"
+    },
+    {
+      "Daily Time Spent on Site": "53.22",
+      "Age": "44",
+      "Area Income": "44307.18",
+      "Daily Internet Usage": "108.85",
+      "Ad Topic Line": "Horizontal client-server database",
+      "City": "Port Aprilville",
+      "Male": "0",
+      "Country": "United States Virgin Islands",
+      "Timestamp": "2016-05-26 06:03:57",
+      "Clicked on Ad": "1"
+    },
+    {
+      "Daily Time Spent on Site": "73.88",
+      "Age": "29",
+      "Area Income": "63109.74",
+      "Daily Internet Usage": "233.61",
+      "Ad Topic Line": "Digitized zero-defect implementation",
+      "City": "Kennethview",
+      "Male": "0",
+      "Country": "Saint Helena",
+      "Timestamp": "2016-01-04 06:37:15",
+      "Clicked on Ad": "0"
+    },
+    {
+      "Daily Time Spent on Site": "65.4",
+      "Age": "33",
+      "Area Income": "66699.12",
+      "Daily Internet Usage": "247.31",
+      "Ad Topic Line": "Adaptive 24hour Graphic Interface",
+      "City": "Sylviaview",
+      "Male": "0",
+      "Country": "Palau",
+      "Timestamp": "2016-02-12 22:51:08",
+      "Clicked on Ad": "0"
+    },
+    {
+      "Daily Time Spent on Site": "76.76",
+      "Age": "25",
+      "Area Income": "50468.36",
+      "Daily Internet Usage": "230.77",
+      "Ad Topic Line": "Secured uniform instruction set",
+      "City": "Kylieview",
+      "Male": "1",
+      "Country": "Niue",
+      "Timestamp": "2016-05-26 13:28:36",
+      "Clicked on Ad": "0"
+    },
+    {
+      "Daily Time Spent on Site": "80.72",
+      "Age": "31",
+      "Area Income": "68614.98",
+      "Daily Internet Usage": "186.37",
+      "Ad Topic Line": "Re-engineered neutral success",
+      "City": "Juliaport",
+      "Male": "0",
+      "Country": "Costa Rica",
+      "Timestamp": "2016-04-19 05:15:28",
+      "Clicked on Ad": "0"
+    },
+    {
+      "Daily Time Spent on Site": "81.98",
+      "Age": "40",
+      "Area Income": "65461.92",
+      "Daily Internet Usage": "229.22",
+      "Ad Topic Line": "Ameliorated upward-trending definition",
+      "City": "Taylorberg",
+      "Male": "0",
+      "Country": "Seychelles",
+      "Timestamp": "2016-04-15 11:51:14",
+      "Clicked on Ad": "0"
+    },
+    {
+      "Daily Time Spent on Site": "75.81",
+      "Age": "40",
+      "Area Income": "71157.05",
+      "Daily Internet Usage": "229.19",
+      "Ad Topic Line": "Inverse zero-defect capability",
+      "City": "Sanchezland",
+      "Male": "0",
+      "Country": "Greenland",
+      "Timestamp": "2016-03-27 19:50:11",
+      "Clicked on Ad": "0"
+    }
+  ]
+}

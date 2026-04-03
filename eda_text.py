@@ -56,11 +56,19 @@ if 'json_data' in dir() or 'eda_data' in dir():
             'duplicate_percentage': float((df[answer_col].duplicated().sum() / len(df)) * 100)
         }
     
-    # Complete rows
+    # Complete rows (safe for unhashable columns like dict/list in `answers`)
+    hashable_df = df.copy()
+    for col in hashable_df.columns:
+        if hashable_df[col].apply(lambda x: isinstance(x, (dict, list, set))).any():
+            hashable_df[col] = hashable_df[col].apply(
+                lambda x: json_lib.dumps(x, sort_keys=True) if isinstance(x, (dict, list, set)) else x
+            )
+
+    complete_dups = hashable_df.duplicated().sum()
     data_dict['duplicate_analysis']['complete_rows'] = {
-        'total_duplicates': int(df.duplicated().sum()),
-        'unique_rows': int(len(df) - df.duplicated().sum()),
-        'duplicate_percentage': float((df.duplicated().sum() / len(df)) * 100)
+        'total_duplicates': int(complete_dups),
+        'unique_rows': int(len(df) - complete_dups),
+        'duplicate_percentage': float((complete_dups / len(df)) * 100)
     }
     
     print("✓ Enhanced duplicate metrics added to JSON export")
@@ -273,8 +281,14 @@ if 'question' in df.columns and answer_col:
     print(f"5. DUPLICATE QUESTION-ANSWER PAIRS:")
     print(f"   Total: {qa_pairs:,} ({qa_pct:.2f}%)\n")
 
-# 6. Complete duplicate rows
-complete_dups = df.duplicated().sum()
+# 6. Complete duplicate rows (safe for unhashable dict/list columns)
+hashable_df = df.copy()
+for col in hashable_df.columns:
+    if hashable_df[col].apply(lambda x: isinstance(x, (dict, list, set))).any():
+        hashable_df[col] = hashable_df[col].apply(
+            lambda x: json_lib.dumps(x, sort_keys=True) if isinstance(x, (dict, list, set)) else x
+        )
+complete_dups = hashable_df.duplicated().sum()
 complete_pct = (complete_dups / len(df)) * 100
 print(f"6. COMPLETE DUPLICATE ROWS:")
 print(f"   Total: {complete_dups:,} ({complete_pct:.2f}%)")

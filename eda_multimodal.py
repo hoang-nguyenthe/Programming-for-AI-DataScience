@@ -1163,6 +1163,32 @@ print(f'✅ Gender bias analysis complete: ratio = {bias_ratio}x (male/female)')
 # Code Cell 34
 log('\n=== SECTION 10: KEY INSIGHTS (UPDATED) ===')
 
+
+# --- Explicitly log average channel intensity and brightness stats ---
+avg_r_mean = np.mean(avg_r) if 'avg_r' in locals() else None
+avg_g_mean = np.mean(avg_g) if 'avg_g' in locals() else None
+avg_b_mean = np.mean(avg_b) if 'avg_b' in locals() else None
+brightness_mean = np.mean(brightness) if 'brightness' in locals() else None
+
+# Add to log file (TXT)
+log('\n=== COLOR CHANNEL & BRIGHTNESS STATS ===')
+if avg_r_mean is not None and avg_g_mean is not None and avg_b_mean is not None and brightness_mean is not None:
+    log(f'Average channel intensity: R={avg_r_mean:.2f}, G={avg_g_mean:.2f}, B={avg_b_mean:.2f}')
+    log(f'Average brightness: {brightness_mean:.2f}')
+else:
+    log('Color channel/brightness stats not available.')
+
+# Add to JSON (top-level summary)
+json_data['color_brightness_summary'] = {
+    'average_channel_intensity': {
+        'red': float(avg_r_mean) if avg_r_mean is not None else None,
+        'green': float(avg_g_mean) if avg_g_mean is not None else None,
+        'blue': float(avg_b_mean) if avg_b_mean is not None else None
+    },
+    'average_brightness': float(brightness_mean) if brightness_mean is not None else None
+}
+save_json()
+
 insights = {
     'dataset_characteristics': [
         f'{n_unique_images} unique images × 5 captions = {n_total_pairs} multimodal pairs',
@@ -1175,7 +1201,8 @@ insights = {
         f'61.1% of captions start with "A" — dominant descriptive pattern',
         f'Most described subjects: dog, man, woman, boy, girl',
         f'Inter-annotator Jaccard similarity: {similarity_mean:.3f} (moderate agreement)',
-        f'Warm-toned images: R={np.mean(avg_r):.1f}, G={np.mean(avg_g):.1f}, B={np.mean(avg_b):.1f}',
+        f'Warm-toned images: R={avg_r_mean:.1f}, G={avg_g_mean:.1f}, B={avg_b_mean:.1f}',
+        f'Brightness: {brightness_mean:.1f}',
         f'POS distribution: NOUNs dominate captions (typical for descriptive text)',
         f'Gender bias ratio: {bias_ratio}x (more male-gendered words than female)',
         f'Duplicate captions across images: {len(duplicated_across_images)} unique captions shared',

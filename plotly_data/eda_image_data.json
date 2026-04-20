@@ -1,0 +1,502 @@
+{
+  "dataset_overview": {
+    "name": "SVHN",
+    "task": "digit_classification",
+    "total_images": 99289,
+    "num_classes": 10,
+    "image_shape": [
+      32,
+      32,
+      3
+    ],
+    "train_samples": 73257,
+    "test_samples": 26032,
+    "format": "RGB",
+    "pixel_range": "0-255"
+  },
+  "class_distribution": {
+    "classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "counts": [
+      6692,
+      18960,
+      14734,
+      11379,
+      9981,
+      9266,
+      7704,
+      7614,
+      6705,
+      6254
+    ],
+    "percentages": [
+      6.739920837152153,
+      19.0957709313217,
+      14.839508908338287,
+      11.460484041535315,
+      10.052473083624571,
+      9.33235303004361,
+      7.759167682220588,
+      7.668523199951656,
+      6.7530139290354425,
+      6.298784356776682
+    ],
+    "imbalance_ratio": 3.0316597377678285,
+    "total_samples": 99289,
+    "train_samples": 73257,
+    "test_samples": 26032
+  },
+  "pixel_statistics": {
+    "mean_r": 0.4415509104728699,
+    "mean_g": 0.44605568051338196,
+    "mean_b": 0.4717999994754791,
+    "std_r": 0.203962504863739,
+    "std_g": 0.20805400609970093,
+    "std_b": 0.2057601809501648,
+    "overall_mean": 0.4531351327896118,
+    "overall_std": 0.20636335015296936,
+    "total_pixels": 305015808,
+    "image_shape": [
+      32,
+      32,
+      3
+    ]
+  },
+  "per_class_pixel_stats": [
+    {
+      "digit": 0,
+      "count": 6692,
+      "mean_brightness": 0.45861750841140747,
+      "mean_r": 0.44705429673194885,
+      "mean_g": 0.45198124647140503,
+      "mean_b": 0.47681644558906555
+    },
+    {
+      "digit": 1,
+      "count": 18960,
+      "mean_brightness": 0.4515817165374756,
+      "mean_r": 0.44097864627838135,
+      "mean_g": 0.44423291087150574,
+      "mean_b": 0.4695338308811188
+    },
+    {
+      "digit": 2,
+      "count": 14734,
+      "mean_brightness": 0.45477378368377686,
+      "mean_r": 0.44373878836631775,
+      "mean_g": 0.44785067439079285,
+      "mean_b": 0.47273099422454834
+    },
+    {
+      "digit": 3,
+      "count": 11379,
+      "mean_brightness": 0.4507325291633606,
+      "mean_r": 0.4383702874183655,
+      "mean_g": 0.4438808262348175,
+      "mean_b": 0.46994638442993164
+    },
+    {
+      "digit": 4,
+      "count": 9981,
+      "mean_brightness": 0.45405420660972595,
+      "mean_r": 0.44161832332611084,
+      "mean_g": 0.4470103979110718,
+      "mean_b": 0.4735339283943176
+    },
+    {
+      "digit": 5,
+      "count": 9266,
+      "mean_brightness": 0.45143741369247437,
+      "mean_r": 0.43989020586013794,
+      "mean_g": 0.4445931613445282,
+      "mean_b": 0.4698289930820465
+    },
+    {
+      "digit": 6,
+      "count": 7704,
+      "mean_brightness": 0.456411212682724,
+      "mean_r": 0.44499704241752625,
+      "mean_g": 0.4492776691913605,
+      "mean_b": 0.4749596118927002
+    },
+    {
+      "digit": 7,
+      "count": 7614,
+      "mean_brightness": 0.4494689404964447,
+      "mean_r": 0.43692103028297424,
+      "mean_g": 0.4423343241214752,
+      "mean_b": 0.46915119886398315
+    },
+    {
+      "digit": 8,
+      "count": 6705,
+      "mean_brightness": 0.4562687277793884,
+      "mean_r": 0.4447718560695648,
+      "mean_g": 0.44902876019477844,
+      "mean_b": 0.47500526905059814
+    },
+    {
+      "digit": 9,
+      "count": 6254,
+      "mean_brightness": 0.4506067633628845,
+      "mean_r": 0.43825799226760864,
+      "mean_g": 0.443014919757843,
+      "mean_b": 0.4705471396446228
+    }
+  ],
+  "dimension_validation": {
+    "expected_shape": [
+      32,
+      32,
+      3
+    ],
+    "train_shape": [
+      32,
+      32,
+      3
+    ],
+    "test_shape": [
+      32,
+      32,
+      3
+    ],
+    "train_valid": true,
+    "test_valid": true,
+    "all_valid": true,
+    "total_images": 99289,
+    "valid_percentage": 100.0
+  },
+  "sample_images": {
+    "digit_0": {
+      "samples": [
+        {
+          "path": "plotly_data/sample_images/digit_0_sample_0.png",
+          "index": 52
+        },
+        {
+          "path": "plotly_data/sample_images/digit_0_sample_1.png",
+          "index": 17831
+        },
+        {
+          "path": "plotly_data/sample_images/digit_0_sample_2.png",
+          "index": 35748
+        },
+        {
+          "path": "plotly_data/sample_images/digit_0_sample_3.png",
+          "index": 55089
+        },
+        {
+          "path": "plotly_data/sample_images/digit_0_sample_4.png",
+          "index": 73239
+        }
+      ],
+      "class_size": 4948
+    },
+    "digit_1": {
+      "samples": [
+        {
+          "path": "plotly_data/sample_images/digit_1_sample_0.png",
+          "index": 0
+        },
+        {
+          "path": "plotly_data/sample_images/digit_1_sample_1.png",
+          "index": 18164
+        },
+        {
+          "path": "plotly_data/sample_images/digit_1_sample_2.png",
+          "index": 36820
+        },
+        {
+          "path": "plotly_data/sample_images/digit_1_sample_3.png",
+          "index": 54898
+        },
+        {
+          "path": "plotly_data/sample_images/digit_1_sample_4.png",
+          "index": 73254
+        }
+      ],
+      "class_size": 13861
+    },
+    "digit_2": {
+      "samples": [
+        {
+          "path": "plotly_data/sample_images/digit_2_sample_0.png",
+          "index": 2
+        },
+        {
+          "path": "plotly_data/sample_images/digit_2_sample_1.png",
+          "index": 18217
+        },
+        {
+          "path": "plotly_data/sample_images/digit_2_sample_2.png",
+          "index": 36664
+        },
+        {
+          "path": "plotly_data/sample_images/digit_2_sample_3.png",
+          "index": 55060
+        },
+        {
+          "path": "plotly_data/sample_images/digit_2_sample_4.png",
+          "index": 73253
+        }
+      ],
+      "class_size": 10585
+    },
+    "digit_3": {
+      "samples": [
+        {
+          "path": "plotly_data/sample_images/digit_3_sample_0.png",
+          "index": 3
+        },
+        {
+          "path": "plotly_data/sample_images/digit_3_sample_1.png",
+          "index": 18532
+        },
+        {
+          "path": "plotly_data/sample_images/digit_3_sample_2.png",
+          "index": 36670
+        },
+        {
+          "path": "plotly_data/sample_images/digit_3_sample_3.png",
+          "index": 55025
+        },
+        {
+          "path": "plotly_data/sample_images/digit_3_sample_4.png",
+          "index": 73240
+        }
+      ],
+      "class_size": 8497
+    },
+    "digit_4": {
+      "samples": [
+        {
+          "path": "plotly_data/sample_images/digit_4_sample_0.png",
+          "index": 15
+        },
+        {
+          "path": "plotly_data/sample_images/digit_4_sample_1.png",
+          "index": 17855
+        },
+        {
+          "path": "plotly_data/sample_images/digit_4_sample_2.png",
+          "index": 36298
+        },
+        {
+          "path": "plotly_data/sample_images/digit_4_sample_3.png",
+          "index": 54790
+        },
+        {
+          "path": "plotly_data/sample_images/digit_4_sample_4.png",
+          "index": 73237
+        }
+      ],
+      "class_size": 7458
+    },
+    "digit_5": {
+      "samples": [
+        {
+          "path": "plotly_data/sample_images/digit_5_sample_0.png",
+          "index": 5
+        },
+        {
+          "path": "plotly_data/sample_images/digit_5_sample_1.png",
+          "index": 18227
+        },
+        {
+          "path": "plotly_data/sample_images/digit_5_sample_2.png",
+          "index": 36568
+        },
+        {
+          "path": "plotly_data/sample_images/digit_5_sample_3.png",
+          "index": 55486
+        },
+        {
+          "path": "plotly_data/sample_images/digit_5_sample_4.png",
+          "index": 73251
+        }
+      ],
+      "class_size": 6882
+    },
+    "digit_6": {
+      "samples": [
+        {
+          "path": "plotly_data/sample_images/digit_6_sample_0.png",
+          "index": 21
+        },
+        {
+          "path": "plotly_data/sample_images/digit_6_sample_1.png",
+          "index": 19174
+        },
+        {
+          "path": "plotly_data/sample_images/digit_6_sample_2.png",
+          "index": 37516
+        },
+        {
+          "path": "plotly_data/sample_images/digit_6_sample_3.png",
+          "index": 55004
+        },
+        {
+          "path": "plotly_data/sample_images/digit_6_sample_4.png",
+          "index": 73255
+        }
+      ],
+      "class_size": 5727
+    },
+    "digit_7": {
+      "samples": [
+        {
+          "path": "plotly_data/sample_images/digit_7_sample_0.png",
+          "index": 14
+        },
+        {
+          "path": "plotly_data/sample_images/digit_7_sample_1.png",
+          "index": 18575
+        },
+        {
+          "path": "plotly_data/sample_images/digit_7_sample_2.png",
+          "index": 36401
+        },
+        {
+          "path": "plotly_data/sample_images/digit_7_sample_3.png",
+          "index": 54532
+        },
+        {
+          "path": "plotly_data/sample_images/digit_7_sample_4.png",
+          "index": 73242
+        }
+      ],
+      "class_size": 5595
+    },
+    "digit_8": {
+      "samples": [
+        {
+          "path": "plotly_data/sample_images/digit_8_sample_0.png",
+          "index": 13
+        },
+        {
+          "path": "plotly_data/sample_images/digit_8_sample_1.png",
+          "index": 19164
+        },
+        {
+          "path": "plotly_data/sample_images/digit_8_sample_2.png",
+          "index": 37420
+        },
+        {
+          "path": "plotly_data/sample_images/digit_8_sample_3.png",
+          "index": 55079
+        },
+        {
+          "path": "plotly_data/sample_images/digit_8_sample_4.png",
+          "index": 73249
+        }
+      ],
+      "class_size": 5045
+    },
+    "digit_9": {
+      "samples": [
+        {
+          "path": "plotly_data/sample_images/digit_9_sample_0.png",
+          "index": 1
+        },
+        {
+          "path": "plotly_data/sample_images/digit_9_sample_1.png",
+          "index": 17646
+        },
+        {
+          "path": "plotly_data/sample_images/digit_9_sample_2.png",
+          "index": 35879
+        },
+        {
+          "path": "plotly_data/sample_images/digit_9_sample_3.png",
+          "index": 54121
+        },
+        {
+          "path": "plotly_data/sample_images/digit_9_sample_4.png",
+          "index": 73256
+        }
+      ],
+      "class_size": 4659
+    }
+  },
+  "quality_assessment": {
+    "corrupted_images": 0,
+    "missing_labels": 0,
+    "outlier_pixels": 0.2781803361483481,
+    "consistent_format": true,
+    "data_completeness": 100.0
+  },
+  "brightness_contrast_distribution": {
+    "brightness": {
+      "mean": 0.45313516716188706,
+      "std": 0.1584734851290091,
+      "min": 0.06071665645424837,
+      "max": 0.969656352124183,
+      "bin_centers": [
+        0.05,
+        0.15000000000000002,
+        0.25,
+        0.35000000000000003,
+        0.45,
+        0.55,
+        0.6500000000000001,
+        0.75,
+        0.8500000000000001,
+        0.95
+      ],
+      "histogram": [
+        65,
+        3051,
+        13872,
+        23778,
+        23196,
+        17420,
+        10294,
+        4922,
+        2262,
+        429
+      ],
+      "sample_indices": 99289
+    },
+    "contrast": {
+      "mean": 0.12431648398941676,
+      "std": 0.04491541528944698,
+      "min": 0.03481768333939397,
+      "max": 0.36633907922619297,
+      "bin_centers": [
+        0.05,
+        0.15000000000000002,
+        0.25,
+        0.35000000000000003,
+        0.45,
+        0.55,
+        0.6500000000000001,
+        0.75,
+        0.8500000000000001,
+        0.95
+      ],
+      "histogram": [
+        33924,
+        58641,
+        6556,
+        168,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "sample_indices": 99289
+    }
+  }
+}

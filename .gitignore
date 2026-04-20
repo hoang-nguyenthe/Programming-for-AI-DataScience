@@ -2,3 +2,5 @@ data/
 flickr8k/
 __pycache__/
 .ipynb_checkpoints/
+.DS_Store
+notebooks/data/
